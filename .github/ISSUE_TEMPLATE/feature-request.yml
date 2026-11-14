@@ -1,0 +1,72 @@
+name: "Feature request"
+description: "Suggest an idea for Npltz for Android"
+title: "[Feature]: "
+labels: ["enhancement"]
+assignees:
+  - harilvfs
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to suggest a feature. Please keep in mind that
+        Npltz is a small, offline Android app with no ads or tracking.
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: "Use case"
+      description: "How would this feature help you or other users?"
+      placeholder: "Describe the real situation where this would be useful."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: "Area"
+      options:
+        - Calendar
+        - Events and reminders
+        - Notifications
+        - Widgets
+        - Settings and themes
+        - Accessibility
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: "Proposed solution"
+      description: "If you have a specific solution in mind, describe it here."
+      placeholder: "Explain how you think the feature should work."
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "Alternatives"
+      description: "Have you considered any alternative solutions or workarounds?"
+      placeholder: "Describe other possible approaches."
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_info
+    attributes:
+      label: "Additional information"
+      description: "Add references, screenshots or examples from other apps if useful."
+      placeholder: "Add any extra context here."
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: "Code of Conduct"
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/harilvfs/npltz-android/blob/main/.github/CODE_OF_CONDUCT.md).
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

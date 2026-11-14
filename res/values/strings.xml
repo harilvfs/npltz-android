@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Npltz</string>
+    <string name="widget_date_label">Npltz date</string>
+    <string name="widget_date_description">Today\'s BS and AD date.</string>
+    <string name="widget_month_label">Npltz month</string>
+    <string name="widget_month_description">The current Bikram Sambat month.</string>
+    <string name="widget_greeting_label">Npltz greeting</string>
+    <string name="widget_greeting_description">Live greeting and Nepal time.</string>
+
+    <string name="settings">Settings</string>
+    <string name="back">Back</string>
+    <string name="repository">GitHub repository</string>
+    <string name="today">Today</string>
+    <string name="search">Search</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
+    <string name="previous_month">Previous month</string>
+    <string name="next_month">Next month</string>
+
+    <string name="appearance">APPEARANCE</string>
+    <string name="home_section">HOME</string>
+    <string name="calendar_section">CALENDAR</string>
+    <string name="notifications_section">NOTIFICATIONS</string>
+    <string name="about_section">ABOUT</string>
+    <string name="repositories">REPOSITORIES</string>
+
+    <string name="theme">Theme</string>
+    <string name="font">Font</string>
+    <string name="text_size">Text size</string>
+    <string name="language">Language</string>
+    <string name="clock_24h">24-hour time</string>
+    <string name="greeting">Greeting</string>
+    <string name="your_name">Your name</string>
+    <string name="events_notes">Events &amp; notes</string>
+    <string name="daily_reminder">Daily reminder</string>
+    <string name="about_npltz">About Npltz</string>
+    <string name="about">About</string>
+    <string name="tui_app">TUI app</string>
+    <string name="android_app">Android app</string>
+    <string name="star_note">If Npltz is useful to you in any way, you can support me by starring the repo.</string>
+    <string name="bugs_section">REPORT A BUG</string>
+    <string name="about_first_app">This is my first Android app development, so if you find any bugs, please report them.</string>
+    <string name="report_issue">Open a GitHub issue</string>
+    <string name="report_issue_url">github.com/harilvfs/npltz-android/issues</string>
+    <string name="report_mail">Email a bug report</string>
+    <string name="dev_mail_url">harilvfs@chalisehari.com.np</string>
+    <string name="tui_repo_url">github.com/harilvfs/npltz</string>
+    <string name="android_repo_url">github.com/harilvfs/npltz-android</string>
+
+    <string name="about_developer">DEVELOPER</string>
+    <string name="about_npltz_section">NPLTZ</string>
+    <string name="dev_name">Hari Chalise</string>
+    <string name="dev_handle">@harilvfs</string>
+    <string name="dev_bio">Hey, I\'m Hari Chalise, a Linux user and a developer. I write TUI apps and Bash scripts to make my life easier, and contribute to the open source community.</string>
+    <string name="about_github">GitHub profile</string>
+    <string name="about_website">Website</string>
+    <string name="about_x">X (Twitter)</string>
+    <string name="about_bluesky">Bluesky</string>
+    <string name="about_email">Email</string>
+    <string name="about_app_text">Npltz is a clean Nepali (Bikram Sambat) calendar for Android, built with Java and Material 3. It shows BS dates with an AD side view, a live greeting and Nepal time, home-screen widgets, daily reminders, a permanent date notification, and reminders for events and special days.\n\nNpltz started as a TUI app for desktop and Termux. This Android app is a native rebuild that shares the same calendar logic and design language, now built around Material 3 components and a Material You color system.\n\nEverything runs offline. The BS calendar data is compiled into the app, so there is no API, no account, no ads, no analytics, and no tracking. You open it, use it, and close it.\n\nBikram Sambat data is included up to 2090 BS. Data beyond that is not reliably available yet, so the app will be updated once accurate data is out.</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="done">Done</string>
+    <string name="add_event">Add event</string>
+    <string name="jump">Jump</string>
+    <string name="close">Close</string>
+    <string name="clear">Clear</string>
+    <string name="choose_time">Choose time</string>
+    <string name="change">Change</string>
+    <string name="send_test">Send test</string>
+    <string name="go_to_today">Go to today</string>
+    <string name="permanent_notification">Permanent notification</string>
+    <string name="title_hint">Title</string>
+    <string name="note_hint">Note (optional)</string>
+    <string name="time">TIME</string>
+    <string name="reminder_sent">Reminder sent</string>
+    <string name="search_dates">Search dates</string>
+    <string name="name_used_only">Used only for the greeting.</string>
+    <string name="reminder_time">REMINDER TIME</string>
+    <string name="selected">Selected</string>
+</resources>

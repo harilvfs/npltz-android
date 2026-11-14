@@ -1,0 +1,158 @@
+name: "Bug report"
+description: "Report a problem with Npltz for Android"
+title: "[Bug]: "
+labels: ["bug"]
+assignees:
+  - harilvfs
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please include enough detail to reproduce it.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "What went wrong?"
+      placeholder: "Describe the problem in detail."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Steps to reproduce"
+      description: "List the steps that cause the problem."
+      placeholder: |
+        1. Open the app
+        2. Tap ...
+        3. See ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: "Expected behavior"
+      description: "What should have happened?"
+      placeholder: "Describe the correct behavior."
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual_behavior
+    attributes:
+      label: "Actual behavior"
+      description: "What happened instead?"
+      placeholder: "Describe what you saw."
+    validations:
+      required: true
+
+  - type: input
+    id: app_version
+    attributes:
+      label: "App version"
+      description: "You can find this in Settings > About."
+      placeholder: "e.g. 1.0.0 (version code 1)"
+    validations:
+      required: true
+
+  - type: input
+    id: android_version
+    attributes:
+      label: "Android version"
+      description: "Include the ROM or skin name if relevant."
+      placeholder: "e.g. Android 10, MIUI 12, Android 14"
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: "Device"
+      description: "Which phone or emulator are you using?"
+      placeholder: "e.g. Redmi Note 10, Pixel 6, Android Studio emulator"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: install_source
+    attributes:
+      label: "How did you install the app?"
+      options:
+        - GitHub release APK
+        - Built from source
+        - Other (please specify below)
+    validations:
+      required: true
+
+  - type: input
+    id: other_install_source
+    attributes:
+      label: "Other install source"
+      description: "If you selected 'Other', specify where the APK came from."
+      placeholder: "Enter the source"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: "Where is the problem?"
+      options:
+        - Calendar
+        - Events and reminders
+        - Notifications
+        - Widgets
+        - Settings and themes
+        - Build or installation
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: launcher
+    attributes:
+      label: "Launcher"
+      description: "Relevant for widget problems."
+      placeholder: "e.g. MIUI Home, Pixel Launcher, Nova Launcher"
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: "Screenshots or recording"
+      description: "Attach images or a short recording if they help explain the problem."
+      placeholder: "Drag and drop files here."
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: "Logs"
+      description: "Optional. Paste relevant output from `adb logcat` or the build."
+      placeholder: "Paste logs here."
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_info
+    attributes:
+      label: "Additional information"
+      description: "Anything else that may help."
+      placeholder: "Add other details here."
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: "Code of Conduct"
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/harilvfs/npltz-android/blob/main/.github/CODE_OF_CONDUCT.md).
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

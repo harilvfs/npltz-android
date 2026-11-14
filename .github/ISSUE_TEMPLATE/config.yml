@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: npltz terminal calendar
+    url: https://github.com/harilvfs/npltz
+    about: Issues and discussions for the terminal version of npltz.
+  - name: Npltz for Android releases
+    url: https://github.com/harilvfs/npltz-android/releases/latest
+    about: Download the latest Android APK.

@@ -1,0 +1,72 @@
+name: Build and test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'res/**'
+      - 'tools/**'
+      - 'data/**'
+      - 'assets/**'
+      - 'AndroidManifest.xml'
+      - 'build.py'
+      - 'build.gradle'
+      - 'settings.gradle'
+      - 'gradle.properties'
+      - 'gradle/wrapper/**'
+      - 'gradlew'
+      - 'gradlew.bat'
+      - '.github/workflows/ci.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'res/**'
+      - 'tools/**'
+      - 'data/**'
+      - 'assets/**'
+      - 'AndroidManifest.xml'
+      - 'build.py'
+      - 'build.gradle'
+      - 'settings.gradle'
+      - 'gradle.properties'
+      - 'gradle/wrapper/**'
+      - 'gradlew'
+      - 'gradlew.bat'
+      - '.github/workflows/ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build APK and run tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v4
+        with:
+          packages: 'platform-tools platforms;android-35 build-tools;35.0.0'
+
+      - name: Build and test
+        run: python3 build.py
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v5
+        with:
+          name: npltz-android
+          path: dist/npltz-android.apk

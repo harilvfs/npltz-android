@@ -1,0 +1,72 @@
+name: "Custom issue"
+description: "Submit an issue that does not fit the other templates"
+title: "[Custom]: "
+labels: ["custom"]
+assignees:
+  - harilvfs
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "Describe the issue or request clearly."
+      placeholder: "Explain what you need help with."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Steps to reproduce"
+      description: "Fill this in if the issue can be reproduced."
+      placeholder: |
+        1. First step
+        2. Second step
+        3. ...
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: "Expected behavior"
+      description: "What should happen instead?"
+      placeholder: "Describe the expected result."
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: "Screenshots or recording"
+      description: "Attach images or a short recording if they help."
+      placeholder: "Drag and drop files here."
+    validations:
+      required: false
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: "Proposed solution"
+      description: "If you have a solution in mind, describe it here."
+      placeholder: "Explain your proposed solution."
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_info
+    attributes:
+      label: "Additional information"
+      description: "Add any other relevant details."
+      placeholder: "Add extra context here."
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: "Code of Conduct"
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/harilvfs/npltz-android/blob/main/.github/CODE_OF_CONDUCT.md).
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

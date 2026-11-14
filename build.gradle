@@ -1,0 +1,104 @@
+plugins {
+    id "com.android.application" version "8.13.2"
+}
+
+android {
+    namespace "com.harilvfs.npltz"
+    compileSdk 35
+    buildToolsVersion "35.0.0"
+
+    defaultConfig {
+        applicationId "com.harilvfs.npltz"
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile "AndroidManifest.xml"
+            java.srcDirs = ["src"]
+            res.srcDirs = ["res"]
+            assets.srcDirs = ["assets"]
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ""
+            versionNameSuffix ""
+            debuggable false
+        }
+        release {
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+
+    lint {
+        abortOnError true
+        checkReleaseBuilds false
+    }
+}
+
+dependencies {
+    implementation "com.google.android.material:material:1.14.0"
+}
+
+def calendarJson = file("data/calendar_data.json")
+def calendarSource = file("src/com/harilvfs/npltz/CalendarData.java")
+
+tasks.register("generateCalendarData", Exec) {
+    inputs.file(calendarJson)
+    outputs.file(calendarSource)
+    commandLine "python3", "tools/gen_calendar_data.py", calendarJson, calendarSource
+}
+
+tasks.register("copyCalendarAsset", Copy) {
+    from calendarJson
+    into "assets"
+}
+
+tasks.named("preBuild").configure {
+    dependsOn "generateCalendarData", "copyCalendarAsset"
+}
+
+def appClasses = layout.buildDirectory.dir(
+    "intermediates/javac/debug/compileDebugJavaWithJavac/classes"
+)
+
+tasks.register("compileCoreTest", JavaCompile) {
+    dependsOn "compileDebugJavaWithJavac"
+    source = file("tools/CoreTest.java")
+    classpath = files(appClasses)
+    destinationDirectory.set(layout.buildDirectory.dir("classes/coreTest"))
+    options.encoding = "UTF-8"
+    options.release = 11
+}
+
+tasks.register("coreTest", JavaExec) {
+    group = "verification"
+    description = "Runs the calendar conversion checks on the JVM."
+    dependsOn "compileCoreTest"
+    classpath = files(layout.buildDirectory.dir("classes/coreTest"), appClasses)
+    mainClass = "CoreTest"
+}
+
+tasks.register("apk") {
+    group = "build"
+    description = "Builds the debug APK and copies it to dist/npltz-android.apk."
+    dependsOn "assembleDebug"
+    doLast {
+        copy {
+            from layout.buildDirectory.file("outputs/apk/debug/npltz-android-debug.apk")
+            into "dist"
+            rename { "npltz-android.apk" }
+        }
+    }
+}

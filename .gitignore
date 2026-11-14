@@ -1,0 +1,10 @@
+build/
+dist/
+.gradle/
+assets/calendar_data.json
+local.properties
+.idea/
+*.iml
+*.apk
+captures/
+.cxx/

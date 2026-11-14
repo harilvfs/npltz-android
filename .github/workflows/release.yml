@@ -1,0 +1,63 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Tag to release, e.g. v1.0.0 (the tag is created for you)'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build APK and publish release
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v4
+        with:
+          packages: 'platform-tools platforms;android-35 build-tools;35.0.0'
+
+      - name: Build and test
+        run: python3 build.py
+
+      - name: Generate release notes with git-cliff
+        uses: orhun/git-cliff-action@v4
+        with:
+          version: "v2.13.1"
+          config: cliff.toml
+          args: --unreleased --strip header
+        env:
+          OUTPUT: BODY.md
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add release header
+        run: |
+          sed -i '/^## \[unreleased\]/d' BODY.md
+          printf "## What's Changed\n\n%s\n" "$(cat BODY.md)" > BODY.md
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.version || github.ref_name }}
+        run: |
+          gh release create "$TAG" \
+            --title "npltz for android $TAG" \
+            --notes-file BODY.md \
+            dist/npltz-android.apk
