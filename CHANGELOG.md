@@ -2,10 +2,50 @@
 ## [unreleased]
 
 
+### 📚 Documentation
+
+
+- [9a4830d](https://github.com/harilvfs/npltz-android/commit/9a4830d362def99c959fd34f7b6d81ab37488a1b) Add security policy by @harilvfs
+
+
+
+## [1.0.0] - 2026-11-14
+
+
 ### 🚀 Features
 
 
-- [0cd2079](https://github.com/harilvfs/npltz-android/commit/0cd2079a98479dede507061fb9c900cc606856ca) Initial release of npltz for android
+- [0cd2079](https://github.com/harilvfs/npltz-android/commit/0cd2079a98479dede507061fb9c900cc606856ca) Initial release of npltz for android by @harilvfs
+
+
+
+### 📚 Documentation
+
+
+- [1eb5e7a](https://github.com/harilvfs/npltz-android/commit/1eb5e7a96bddc5b6428219a294baf2ee124a5c86) Polish readme and comments by @harilvfs
+
+- [e5debf2](https://github.com/harilvfs/npltz-android/commit/e5debf215df6a8d8180b23a69133448923999e0f) Shorten widget image alt text by @harilvfs
+
+- [06e14b1](https://github.com/harilvfs/npltz-android/commit/06e14b1b961d558d40ec42e433c26f544f3a1932) Labeled preview grid and credits line by @harilvfs
+
+- [76a2750](https://github.com/harilvfs/npltz-android/commit/76a2750f64fcde01b0bdfade726267cabe849b2b) Phone-framed screenshots and credits at the bottom by @harilvfs
+
+- [f442472](https://github.com/harilvfs/npltz-android/commit/f442472bf03a9783bbc58f64062da828f31b4dd6) Compact screenshot strips in the preview by @harilvfs
+
+- [80cf3d9](https://github.com/harilvfs/npltz-android/commit/80cf3d958bdc878871671ae113d1aface1246e5b) Drop about screen from preview, widgets on top by @harilvfs
+
+- [efab8d0](https://github.com/harilvfs/npltz-android/commit/efab8d0579f7ed610800b56c5ab21f0e1d52525d) Keep individual framed screenshots in docs/screens by @harilvfs
+
+- [93ff991](https://github.com/harilvfs/npltz-android/commit/93ff99188246ab079b248b8fbaac055245a689db) Widgets in the same preview row by @harilvfs
+
+- [d0a841c](https://github.com/harilvfs/npltz-android/commit/d0a841cd0719449ecd956f80964847d39fd5cb20) Move widgets to the end of the preview row by @harilvfs
+
+
+
+### ⚙️ Miscellaneous Tasks
+
+
+- [0f084d4](https://github.com/harilvfs/npltz-android/commit/0f084d4defe881ce15174d08f278c891b810e451) Add git-cliff changelog by @harilvfs
 
 
 
