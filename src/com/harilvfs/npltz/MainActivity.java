@@ -243,10 +243,8 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
         }
     }
 
-    /**
-     * Inflates the Settings and About pages once, off the critical path, so
-     * opening them never hitches on first-time layout inflation.
-     */
+    // inflate the settings and about pages once, off the critical path, so
+    // opening them never hitches on first-time layout inflation.
     private void prewarmPages() {
         if (rootView == null) {
             return;
@@ -775,8 +773,7 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
     }
 
     private void showSheet(Sheet sheet) {
-        // expand before show() so the sheet slides once, instead of animating
-        // to the peek height and then re-animating to the top.
+        // expand before show() so the sheet does not slide twice (peek, then top).
         View parent = (View) sheet.content.getParent();
         if (parent != null) {
             BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(parent);
@@ -2158,10 +2155,6 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
             .start();
     }
 
-    // the today/search pill has 6dp elevation, so it would float above any
-    // overlay screen. it is bottom-anchored and nothing depends on its bounds,
-    // so hiding it causes no reflow. it slides in and out instead of popping,
-    // so coming back from settings/about never looks like a jump.
     private void syncChrome() {
         if (bottomActions == null) {
             return;

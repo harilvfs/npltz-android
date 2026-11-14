@@ -1,4 +1,4 @@
-// palette metadata. Colours live in palettes.xml as Material theme overlays.
+// palette metadata. colours live in palettes.xml as material theme overlays.
 package com.harilvfs.npltz;
 
 import android.graphics.Color;

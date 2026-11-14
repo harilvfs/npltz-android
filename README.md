@@ -4,15 +4,14 @@
 
 # npltz for Android
 
-A clean, native Android calendar for Nepali dates (Bikram Sambat). It is driven
-by the same calendar data as [npltz](https://github.com/harilvfs/npltz), the
-terminal calendar, and brings it to a phone with an offline, simple interface.
+A clean, native Android calendar for Nepali dates (Bikram Sambat, also known
+as Nepali Patro). It is driven by the same calendar data as
+[npltz](https://github.com/harilvfs/npltz), the terminal calendar, and brings
+it to a phone with an offline, simple interface.
 
 This is a full native rebuild in Java around Material 3: a custom calendar
 grid, Material You colour and type, and a small set of focused custom views.
-It is Kotlin-free, with no ads, tracking or network permission.
-
-## Preview
+No ads, no tracking and no network permission.
 
 <p align="center">
   <img src="docs/home.png" alt="Npltz home screen" width="260">
@@ -27,12 +26,7 @@ It is Kotlin-free, with no ads, tracking or network permission.
 </p>
 
 <p align="center">
-  <img src="docs/widget-date.png" alt="Date widget" width="300">
-  <img src="docs/widget-greeting.png" alt="Greeting widget" width="300">
-</p>
-
-<p align="center">
-  <img src="docs/widget-month.png" alt="Month widget" width="300">
+  <img src="docs/widgets.png" alt="Npltz date, month and greeting widgets on a home screen" width="300">
 </p>
 
 ## Features
@@ -92,7 +86,7 @@ template and your device details already filled in.
 ## Build
 
 The build script works on Linux, macOS and Windows. You only need the
-dependencies installed on your system; the script finds the rest.
+dependencies installed on your system;
 
 ### Requirements
 
@@ -123,8 +117,8 @@ export JAVA_HOME=/path/to/jdk-17
 ### Build the APK
 
 ```sh
-python3 build.py              # build, then dist/npltz-android.apk
-python3 build.py --install    # build, then adb install -r on the connected phone
+python3 build.py              # build the apk to dist/npltz-android.apk
+python3 build.py --install    # build and install on the connected phone via adb
 python3 build.py --test       # run the calendar checks only
 ```
 
@@ -165,7 +159,6 @@ dates from the Rust tests and round-trips the first and last day of every month.
 ## Notes
 
 - Minimum Android 8.0 (API 26); targets and compiles against API 35.
-- Current version: `1.0.0`.
 - Fully offline: no network permission, ads, analytics or tracking.
 - Events, notes and settings are stored on the device. Clearing app data removes
   them.

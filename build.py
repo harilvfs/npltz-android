@@ -7,7 +7,7 @@
 # usage:
 #   python3 build.py              build the apk and run the calendar tests
 #   python3 build.py --test       run the calendar tests only
-#   python3 build.py --install    build, then install on a connected phone
+#   python3 build.py --install    build, then install on a connected phone via adb
 
 import os
 import platform

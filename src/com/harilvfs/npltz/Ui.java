@@ -125,11 +125,9 @@ public final class Ui {
         );
     }
 
-    /**
-     * The bundled Inter faces are wired through the Material type roles. When
-     * the user picks System or Mono, walk the inflated tree once and swap the
-     * typeface. No per-frame work, no global rebuilds.
-     */
+    // the bundled inter faces are wired through the material type roles; when
+    // the user picks system or mono, walk the inflated tree once and swap the
+    // typeface. no per-frame work, no global rebuilds.
     public static void applyTypography(View root) {
         if (FONT_INTER.equals(fontKey)) {
             return;
