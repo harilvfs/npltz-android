@@ -41,7 +41,7 @@ filter_unconventional = true
 split_commits = false
 
 commit_preprocessors = [
-  { pattern = '\\((\\w+\\s)?#([0-9]+)\)', replace = "" },
+  { pattern = '\\((\\w+\\s)?#([0-9]+)\\)', replace = "" },
 ]
 
 commit_parsers = [
