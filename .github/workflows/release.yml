@@ -42,14 +42,14 @@ jobs:
         with:
           version: "v2.13.1"
           config: cliff.toml
-          args: --unreleased --strip header
+          args: --latest --strip header
         env:
           OUTPUT: BODY.md
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Add release header
         run: |
-          sed -i '/^## \[unreleased\]/d' BODY.md
+          sed -i '/^## \[/d' BODY.md
           printf "## What's Changed\n\n%s\n" "$(cat BODY.md)" > BODY.md
 
       - name: Publish release
