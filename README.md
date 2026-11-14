@@ -15,20 +15,21 @@ No ads, no tracking and no network permission.
 
 <table>
   <tr>
-    <td align="center"><img src="docs/home.png" alt="Npltz home screen" width="230"></td>
-    <td align="center"><img src="docs/year.png" alt="Npltz year view" width="230"></td>
-    <td align="center"><img src="docs/day.png" alt="Npltz day sheet" width="230"></td>
+    <td align="center"><img src="docs/home.png" alt="home" width="200"><br><b><code>Home</code></b></td>
+    <td align="center"><img src="docs/year.png" alt="year" width="200"><br><b><code>Year</code></b></td>
+    <td align="center"><img src="docs/day.png" alt="day" width="200"><br><b><code>Day</code></b></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/settings.png" alt="Npltz settings" width="230"></td>
-    <td align="center"><img src="docs/about.png" alt="Npltz about page" width="230"></td>
-    <td align="center"><img src="docs/events.png" alt="Npltz events and notes" width="230"></td>
+    <td align="center"><img src="docs/settings.png" alt="settings" width="200"><br><b><code>Settings</code></b></td>
+    <td align="center"><img src="docs/about.png" alt="about" width="200"><br><b><code>About</code></b></td>
+    <td align="center"><img src="docs/events.png" alt="events" width="200"><br><b><code>Events</code></b></td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center"><img src="docs/widgets.png" alt="npltz-widget" width="270"><br><b><code>npltz-widget</code></b></td>
   </tr>
 </table>
 
-<p align="center">
-  <img src="docs/widgets.png" alt="npltz-widget" width="270">
-</p>
+<p align="center">Made with ❤️ by <b>Hari Chalise</b></p>
 
 ## Features
 
