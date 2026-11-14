@@ -29,8 +29,6 @@ No ads, no tracking and no network permission.
   </tr>
 </table>
 
-<p align="center">Made with ❤️ by <b>Hari Chalise</b></p>
-
 ## Features
 
 - Bikram Sambat month and year views, with the matching AD date under each day.
@@ -200,4 +198,4 @@ is MIT licensed; this Android app is GPL-3.0.
 
 If you love my work, starring this repo is a support for me. Thank you.
 
-Made with love in Nepal.
+Made with ❤️ by Hari Chalise.
