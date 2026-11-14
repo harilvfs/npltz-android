@@ -13,21 +13,15 @@ This is a full native rebuild in Java around Material 3: a custom calendar
 grid, Material You colour and type, and a small set of focused custom views.
 No ads, no tracking and no network permission.
 
-<table>
-  <tr>
-    <td align="center"><img src="docs/home.png" alt="home" width="200"><br><b><code>Home</code></b></td>
-    <td align="center"><img src="docs/year.png" alt="year" width="200"><br><b><code>Year</code></b></td>
-    <td align="center"><img src="docs/day.png" alt="day" width="200"><br><b><code>Day</code></b></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="docs/settings.png" alt="settings" width="200"><br><b><code>Settings</code></b></td>
-    <td align="center"><img src="docs/about.png" alt="about" width="200"><br><b><code>About</code></b></td>
-    <td align="center"><img src="docs/events.png" alt="events" width="200"><br><b><code>Events</code></b></td>
-  </tr>
-  <tr>
-    <td colspan="3" align="center"><img src="docs/widgets.png" alt="npltz-widget" width="270"><br><b><code>npltz-widget</code></b></td>
-  </tr>
-</table>
+<div align="center">
+
+<a href="docs/screens-1.png"><img src="docs/screens-1.png" width="412" alt="Month view, year view and the day sheet" /></a> <a href="docs/screens-2.png"><img src="docs/screens-2.png" width="412" alt="Settings, about page and events" /></a>
+
+<sub>Month and year views, day details, settings, about and events.<br />Tap any screen to see it full size.</sub>
+
+<a href="docs/widgets.png"><img src="docs/widgets.png" width="180" alt="npltz widgets on a home screen" /></a>
+
+</div>
 
 ## Features
 
