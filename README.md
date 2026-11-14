@@ -13,20 +13,21 @@ This is a full native rebuild in Java around Material 3: a custom calendar
 grid, Material You colour and type, and a small set of focused custom views.
 No ads, no tracking and no network permission.
 
-<p align="center">
-  <img src="docs/home.png" alt="Npltz home screen" width="260">
-  <img src="docs/year.png" alt="Npltz year view" width="260">
-  <img src="docs/day.png" alt="Npltz day sheet" width="260">
-</p>
+<table>
+  <tr>
+    <td align="center"><img src="docs/home.png" alt="Npltz home screen" width="230"></td>
+    <td align="center"><img src="docs/year.png" alt="Npltz year view" width="230"></td>
+    <td align="center"><img src="docs/day.png" alt="Npltz day sheet" width="230"></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/settings.png" alt="Npltz settings" width="230"></td>
+    <td align="center"><img src="docs/about.png" alt="Npltz about page" width="230"></td>
+    <td align="center"><img src="docs/events.png" alt="Npltz events and notes" width="230"></td>
+  </tr>
+</table>
 
 <p align="center">
-  <img src="docs/settings.png" alt="Npltz settings" width="260">
-  <img src="docs/about.png" alt="Npltz about page" width="260">
-  <img src="docs/events.png" alt="Npltz events and notes" width="260">
-</p>
-
-<p align="center">
-  <img src="docs/widgets.png" alt="Npltz date, month and greeting widgets on a home screen" width="300">
+  <img src="docs/widgets.png" alt="npltz-widget" width="270">
 </p>
 
 ## Features
