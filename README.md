@@ -31,11 +31,12 @@ No ads, no tracking and no network permission.
 - Past dates cannot receive new events, but existing past events can be edited.
 - Search by year, month or full BS date: `2083`, `2083-07` or `2083-07-16`.
 - Daily date notification at a chosen time and an optional permanent notification.
-- New Year notifications.
+- Calendar marks, greetings and notifications for both New Years: Baisakh 1
+  (Nepali) and January 1 (Gregorian).
 - Live Nepal Standard Time clock and a personal greeting on the home screen.
 - Date, month and greeting widgets that resize to fit the launcher.
-- Material 3 interface: Catppuccin Mocha by default, plus eight themes, three
-  fonts, four text sizes and English/Nepali scripts.
+- Material 3 interface: Catppuccin Mocha by default, plus seven more themes,
+  three fonts, four text sizes and English/Nepali scripts.
 - Report bugs from Settings with a GitHub issue or a pre-filled bug report mail.
 - Portrait and landscape layouts.
 
@@ -60,12 +61,25 @@ manager.
 | Settings, about and links | Tap the gear button |
 | Back from year view | Android back, or the `Month` tab |
 
-## Changelog
+## Notes
 
-Release notes are generated with [git-cliff](https://git-cliff.org) from
-conventional commits. See [CHANGELOG.md](CHANGELOG.md) for the full history,
-and use [conventional commit messages](https://www.conventionalcommits.org)
-(`feat:`, `fix:`, `perf:` and so on) so your changes land in the changelog.
+- Minimum Android 8.0 (API 26); targets and compiles against API 35.
+- Fully offline: no network permission, ads, analytics or tracking.
+- Events, notes and settings are stored on the device. Clearing app data removes
+  them.
+- Android 12+ may ask for notification and exact alarm permission for reminders.
+- Widgets refresh at midnight (the greeting widget every hour) and after
+  settings change. Some launchers need a resize or re-add after an app update.
+- On phones with aggressive battery managers (MIUI, HyperOS, ColorOS, OxygenOS,
+  Vivo, Realme, Samsung, etc.), enable "Autostart" for Npltz (usually under
+  Settings → Apps or Permissions). Without it, the system blocks widget updates
+  and reminder alarms in the background, so widgets and reminders may not resume
+  after a reboot until you open the app.
+- The calendar data covers 1975–2090 BS.
+- Typeset in [Inter](https://rsms.me/inter/), under the SIL Open Font License;
+  the license text ships with the app in `assets/fonts/Inter-OFL.txt`.
+- APKs from Releases are debug-signed. Build with your own release key if you
+  distribute a modified build.
 
 ## Report a bug
 
@@ -78,7 +92,7 @@ template and your device details already filled in.
 ## Build
 
 The build script works on Linux, macOS and Windows. You only need the
-dependencies installed on your system;
+dependencies installed on your system:
 
 ### Requirements
 
@@ -148,25 +162,12 @@ does not need the Rust binary at runtime.
 The table covers **1975–2090 BS**. `tools/CoreTest.java` checks the reference
 dates from the Rust tests and round-trips the first and last day of every month.
 
-## Notes
+## Changelog
 
-- Minimum Android 8.0 (API 26); targets and compiles against API 35.
-- Fully offline: no network permission, ads, analytics or tracking.
-- Events, notes and settings are stored on the device. Clearing app data removes
-  them.
-- Android 12+ may ask for notification and exact alarm permission for reminders.
-- Widgets refresh at midnight and after settings change. Some launchers need a
-  resize or re-add after an app update.
-- On phones with aggressive battery managers (MIUI, HyperOS, ColorOS, OxygenOS,
-  Vivo, Realme, Samsung, etc.), enable "Autostart" for Npltz (usually under
-  Settings → Apps or Permissions). Without it, the system blocks widget updates
-  and reminder alarms in the background, so widgets and reminders may not resume
-  after a reboot until you open the app.
-- The calendar data covers 1975–2090 BS.
-- Typeset in [Inter](https://rsms.me/inter/), under the SIL Open Font License;
-  the license text ships with the app in `assets/fonts/Inter-OFL.txt`.
-- APKs from Releases are debug-signed. Build with your own release key if you
-  distribute a modified build.
+Release notes are generated with [git-cliff](https://git-cliff.org) from
+conventional commits. See [CHANGELOG.md](CHANGELOG.md) for the full history,
+and use [conventional commit messages](https://www.conventionalcommits.org)
+(`feat:`, `fix:`, `perf:` and so on) so your changes land in the changelog.
 
 ## Contributing
 

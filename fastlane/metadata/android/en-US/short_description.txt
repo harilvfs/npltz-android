@@ -1,0 +1,1 @@
+A clean, offline Nepali (Bikram Sambat) calendar with widgets and reminders.

@@ -1,0 +1,4 @@
+- Autostart row in Settings for phones that block background starts
+- Cleaner greeting widget without the clock
+- Notifications repaint on theme and language change
+- The Gregorian New Year (January 1) is celebrated with its own mark, greeting and notification
