@@ -22,6 +22,11 @@
     <string name="home_section">HOME</string>
     <string name="calendar_section">CALENDAR</string>
     <string name="notifications_section">NOTIFICATIONS</string>
+    <string name="system_section">SYSTEM</string>
+    <string name="autostart_row">Autostart</string>
+    <string name="autostart_on">On</string>
+    <string name="autostart_off">Off</string>
+    <string name="autostart_why">Why? Some phones stop apps from starting after a reboot. Allow autostart so widgets and reminders come back on their own.</string>
     <string name="about_section">ABOUT</string>
     <string name="repositories">REPOSITORIES</string>
 

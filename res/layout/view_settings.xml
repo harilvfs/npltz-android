@@ -534,6 +534,86 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="26dp"
+                    android:id="@+id/autostart_header"
+                    android:text="@string/system_section"
+                    android:textAppearance="@style/TextAppearance.Npltz.Section" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/autostart_card"
+                    style="@style/Widget.Npltz.Card.SurfaceLow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/row_autostart"
+                            style="@style/Widget.Npltz.SettingsRow">
+
+                            <FrameLayout
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:background="@drawable/bg_icon_circle">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center"
+                                    android:contentDescription="@null"
+                                    android:src="@drawable/ic_bolt"
+                                    app:tint="?attr/colorOnPrimaryContainer" />
+                            </FrameLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="14dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/autostart_row"
+                                    android:textAppearance="?attr/textAppearanceBodyLarge"
+                                    android:textColor="?attr/colorOnSurface" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/subtitle_autostart"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="@style/TextAppearance.Npltz.Meta"
+                                    tools:text="On" />
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_chevron_right"
+                                app:tint="?attr/colorOnSurfaceVariant" />
+                        </LinearLayout>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:paddingBottom="12dp"
+                            android:text="@string/autostart_why"
+                            android:textAppearance="@style/TextAppearance.Npltz.Meta" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="26dp"
                     android:text="@string/about_section"
                     android:textAppearance="@style/TextAppearance.Npltz.Section" />
 

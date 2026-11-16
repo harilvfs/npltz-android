@@ -157,10 +157,11 @@ dates from the Rust tests and round-trips the first and last day of every month.
 - Android 12+ may ask for notification and exact alarm permission for reminders.
 - Widgets refresh at midnight and after settings change. Some launchers need a
   resize or re-add after an app update.
-- On MIUI, enable "Autostart" for Npltz (Settings → Apps → Manage apps →
-  Autostart). Without it, MIUI blocks widget updates and reminder alarms in the
-  background, so widgets and the greeting clock may not resume after a reboot
-  until you open the app.
+- On phones with aggressive battery managers (MIUI, HyperOS, ColorOS, OxygenOS,
+  Vivo, Realme, Samsung, etc.), enable "Autostart" for Npltz (usually under
+  Settings → Apps or Permissions). Without it, the system blocks widget updates
+  and reminder alarms in the background, so widgets and reminders may not resume
+  after a reboot until you open the app.
 - The calendar data covers 1975–2090 BS.
 - Typeset in [Inter](https://rsms.me/inter/), under the SIL Open Font License;
   the license text ships with the app in `assets/fonts/Inter-OFL.txt`.

@@ -2,6 +2,8 @@
 package com.harilvfs.npltz;
 
 import android.Manifest;
+import android.app.AppOpsManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,6 +17,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Process;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spannable;
@@ -61,6 +65,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 
+import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -128,6 +133,9 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
     private TextView subtitleName;
     private TextView subtitleEvents;
     private TextView subtitleReminder;
+    private TextView subtitleAutostart;
+    private View autostartHeader;
+    private View autostartCard;
     private TextView settingsFooter;
     private MaterialSwitch switchClock24h;
     private MaterialSwitch switchGreeting;
@@ -286,6 +294,9 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
         subtitleName = settingsOverlay.findViewById(R.id.subtitle_name);
         subtitleEvents = settingsOverlay.findViewById(R.id.subtitle_events);
         subtitleReminder = settingsOverlay.findViewById(R.id.subtitle_reminder);
+        subtitleAutostart = settingsOverlay.findViewById(R.id.subtitle_autostart);
+        autostartHeader = settingsOverlay.findViewById(R.id.autostart_header);
+        autostartCard = settingsOverlay.findViewById(R.id.autostart_card);
         settingsFooter = settingsOverlay.findViewById(R.id.settings_footer);
         switchClock24h = settingsOverlay.findViewById(R.id.switch_clock_24h);
         switchGreeting = settingsOverlay.findViewById(R.id.switch_greeting);
@@ -371,6 +382,7 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
         settingsRow(R.id.row_name, this::openNameDialog);
         settingsRow(R.id.row_events, this::openEventsSheet);
         settingsRow(R.id.row_reminder, this::openReminderDialog);
+        settingsRow(R.id.row_autostart, this::openAutostartSettings);
         settingsRow(R.id.row_about, this::openAbout);
         settingsRow(R.id.row_tui_repo, () -> openUrl(TUI_REPO_URL));
         settingsRow(R.id.row_android_repo, () -> openUrl(ANDROID_REPO_URL));
@@ -422,6 +434,7 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
     @Override
     protected void onResume() {
         super.onResume();
+        refreshAutostartRow();
         if (clockView != null) {
             clockView.start();
         }
@@ -738,8 +751,77 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
         if (subtitleReminder != null) {
             subtitleReminder.setText(reminderSummary());
         }
+        refreshAutostartRow();
         if (settingsFooter != null) {
             settingsFooter.setText("Npltz for Android \u00b7 " + VERSION);
+        }
+    }
+
+    // miui autostart appop, not a public android constant.
+    private static final int MIUI_OP_AUTO_START = 10008;
+
+    private Integer miuiAutostartMode() {
+        AppOpsManager ops = (AppOpsManager) getSystemService(Context.APP_OPS_SERVICE);
+        if (ops == null) {
+            return null;
+        }
+        try {
+            // the int op overload is hidden on newer sdk stubs, so call it
+            // reflectively; miui devices still ship it.
+            Method check = AppOpsManager.class.getMethod(
+                "checkOpNoThrow",
+                int.class,
+                int.class,
+                String.class
+            );
+            Object mode = check.invoke(
+                ops,
+                MIUI_OP_AUTO_START,
+                Process.myUid(),
+                getPackageName()
+            );
+            return (Integer) mode;
+        } catch (ReflectiveOperationException | RuntimeException e) {
+            return null;
+        }
+    }
+
+    private void refreshAutostartRow() {
+        if (subtitleAutostart == null || autostartHeader == null
+            || autostartCard == null) {
+            return;
+        }
+        Integer mode = miuiAutostartMode();
+        if (mode == null) {
+            autostartHeader.setVisibility(View.GONE);
+            autostartCard.setVisibility(View.GONE);
+            return;
+        }
+        boolean allowed = mode == AppOpsManager.MODE_ALLOWED;
+        subtitleAutostart.setText(
+            getString(allowed ? R.string.autostart_on : R.string.autostart_off)
+        );
+    }
+
+    private void openAutostartSettings() {
+        Intent miui = new Intent();
+        miui.setComponent(new ComponentName(
+            "com.miui.securitycenter",
+            "com.miui.permcenter.autostart.AutoStartManagementActivity"
+        ));
+        try {
+            startActivity(miui);
+            return;
+        } catch (RuntimeException e) {
+            // fall through to the app details page, it has the same toggle.
+        }
+        try {
+            startActivity(new Intent(
+                Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                Uri.parse("package:" + getPackageName())
+            ));
+        } catch (RuntimeException e) {
+            Toast.makeText(this, "Settings not found", Toast.LENGTH_SHORT).show();
         }
     }
 
