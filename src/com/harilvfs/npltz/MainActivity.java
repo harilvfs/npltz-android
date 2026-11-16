@@ -77,7 +77,7 @@ import java.util.Set;
 
 public final class MainActivity extends AppCompatActivity implements CalendarView.Host {
     private static final int REQUEST_NOTIFICATIONS = 2081;
-    private static final String VERSION = "1.0.0";
+    private static final String VERSION = "1.1.0";
     private static final String TUI_REPO_URL = "https://github.com/harilvfs/npltz";
     private static final String ANDROID_REPO_URL = "https://github.com/harilvfs/npltz-android";
     private static final String DEV_GITHUB_URL = "https://github.com/harilvfs";
