@@ -15,9 +15,9 @@ No ads, no tracking and no network permission.
 
 <div align="center">
 
-<a href="docs/screens-1.png"><img src="docs/screens-1.png" width="396" alt="Month view, year view and the day sheet" /></a> <a href="docs/screens-2.png"><img src="docs/screens-2.png" width="262" alt="Notification shade and events" /></a> <a href="docs/widgets.png"><img src="docs/widgets.png" width="130" alt="npltz widgets on a home screen" /></a>
+<a href="docs/screens-1.png"><img src="docs/screens-1.png" width="396" alt="Month view, year view and the day sheet" /></a> <a href="docs/screens-2.png"><img src="docs/screens-2.png" width="130" alt="Events and notes" /></a> <a href="docs/widgets.png"><img src="docs/widgets.png" width="130" alt="npltz widgets on a home screen" /></a> <a href="docs/screens/notifications.png"><img src="docs/screens/notifications.png" width="130" alt="The date notification" /></a>
 
-<sub>Month and year views, day details, the date notification, events and widgets.<br />Tap any screen to see it full size.</sub>
+<sub>Month and year views, day details, events, widgets and the date notification.<br />Tap any screen to see it full size.</sub>
 
 </div>
 
