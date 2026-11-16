@@ -1084,7 +1084,7 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
             iconRes = R.drawable.ic_cake;
             accent = theme.error;
             overline.setText(ne ? "उत्सव" : "CELEBRATION");
-            title.setText(ne ? "हरिको जन्मदिन" : "Hari's birthday");
+            title.setText(ne ? "डेभलपरको जन्मदिन" : "Developer's birthday");
             greeting.setText(ne
                 ? "जन्मदिनको शुभकामना, हरि!"
                 : "Happy birthday, Hari! Have a wonderful year.");
