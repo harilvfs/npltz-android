@@ -34,6 +34,7 @@ public final class NotificationScheduler {
     public static final String ACTION_DAILY = "com.harilvfs.npltz.DAILY_REMINDER";
     public static final String ACTION_REFRESH = "com.harilvfs.npltz.REFRESH_DATE";
     public static final String ACTION_NEW_YEAR = "com.harilvfs.npltz.NEW_YEAR";
+    public static final String ACTION_AD_NEW_YEAR = "com.harilvfs.npltz.AD_NEW_YEAR";
     public static final String ACTION_BIRTHDAY = "com.harilvfs.npltz.BIRTHDAY";
 
     private static final int ALARM_REQUEST = 7421;
@@ -42,8 +43,10 @@ public final class NotificationScheduler {
     private static final int PERSISTENT_ALARM_REQUEST = 7423;
     private static final int NEW_YEAR_REQUEST = 7431;
     private static final int BIRTHDAY_REQUEST = 7432;
+    private static final int AD_NEW_YEAR_REQUEST = 7434;
     private static final int NEW_YEAR_NOTIFY_ID = 20812;
     private static final int BIRTHDAY_NOTIFY_ID = 20813;
+    private static final int AD_NEW_YEAR_NOTIFY_ID = 20814;
     private static final int SPECIAL_HOUR = 9;
     static final int PERSISTENT_NOTIFY_ID = 20811;
 
@@ -95,7 +98,9 @@ public final class NotificationScheduler {
             "Npltz celebrations",
             NotificationManager.IMPORTANCE_DEFAULT
         );
-        special.setDescription("Nepali New Year and developer birthday greetings.");
+        special.setDescription(
+            "Nepali New Year, Gregorian New Year and developer birthday greetings."
+        );
         special.setShowBadge(true);
         manager.createNotificationChannel(special);
     }
@@ -165,6 +170,29 @@ public final class NotificationScheduler {
             CalendarLogic.BIRTHDAY_DAY,
             ACTION_BIRTHDAY,
             BIRTHDAY_REQUEST
+        );
+        scheduleAdNewYear(context);
+    }
+
+    private static void scheduleAdNewYear(Context context) {
+        LocalDate now = LocalDate.now();
+        LocalDate next = LocalDate.of(now.getYear(), 1, 1);
+        if (!next.isAfter(now)) {
+            next = LocalDate.of(now.getYear() + 1, 1, 1);
+        }
+        ZonedDateTime trigger = next.atTime(SPECIAL_HOUR, 0).atZone(ZoneId.systemDefault());
+
+        AlarmManager alarmManager =
+            (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager == null) {
+            return;
+        }
+        PendingIntent pending = specialIntent(context, ACTION_AD_NEW_YEAR, AD_NEW_YEAR_REQUEST);
+        alarmManager.cancel(pending);
+        alarmManager.setAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            trigger.toInstant().toEpochMilli(),
+            pending
         );
     }
 
@@ -467,8 +495,9 @@ public final class NotificationScheduler {
             return false;
         }
         boolean newYear = ACTION_NEW_YEAR.equals(action);
+        boolean adNewYear = ACTION_AD_NEW_YEAR.equals(action);
         boolean birthday = ACTION_BIRTHDAY.equals(action);
-        if (!newYear && !birthday) {
+        if (!newYear && !adNewYear && !birthday) {
             return false;
         }
 
@@ -480,7 +509,22 @@ public final class NotificationScheduler {
 
         String title;
         String text;
-        if (newYear) {
+        int iconRes;
+        int accent;
+        if (adNewYear) {
+            iconRes = R.drawable.ic_sparkles;
+            accent = theme.secondary;
+            title = ne ? "नयाँ वर्षको शुभकामना!" : "Happy New Year!";
+            text = ne
+                ? adDate + "\u0964 \u0928\u092f\u093e\u0901 \u0935\u0930\u094d\u0937 "
+                    + CalendarLogic.number(date.getYear(), true)
+                    + " \u0915\u094b \u0939\u093e\u0930\u094d\u0926\u093f\u0915 "
+                    + "\u0936\u0941\u092d\u0915\u093e\u092e\u0928\u093e\u0964"
+                : adDate + ". A brand new year begins, happy "
+                    + date.getYear() + "!";
+        } else if (newYear) {
+            iconRes = R.drawable.ic_star;
+            accent = theme.primary;
             title = ne ? "\u0928\u092f\u093e\u0901 \u0935\u0930\u094d\u0937" : "Nepali New Year";
             String bsDate = CalendarLogic.monthName(CalendarLogic.NEW_YEAR_MONTH, ne)
                 + " " + CalendarLogic.number(CalendarLogic.NEW_YEAR_DAY, ne);
@@ -488,6 +532,8 @@ public final class NotificationScheduler {
                 ? bsDate + " \u00b7 " + adDate + "\u0964 \u0936\u0941\u092d \u0928\u092f\u093e\u0901 \u0935\u0930\u094d\u0937!"
                 : bsDate + " \u00b7 " + adDate + ". Happy Nepali New Year!";
         } else {
+            iconRes = R.drawable.ic_cake;
+            accent = theme.primary;
             title = ne
                 ? "\u0939\u0930\u093f, \u091c\u0928\u094d\u092e\u0926\u093f\u0928\u0915\u094b \u0936\u0941\u092d\u0915\u093e\u092e\u0928\u093e!"
                 : "Happy birthday, Hari!";
@@ -502,14 +548,14 @@ public final class NotificationScheduler {
         }
 
         Notification notification = new Notification.Builder(context, CHANNEL_ID_SPECIAL)
-            .setSmallIcon(newYear ? R.drawable.ic_star : R.drawable.ic_cake)
+            .setSmallIcon(iconRes)
             .setContentTitle(title)
             .setContentText(text)
             .setStyle(new Notification.BigTextStyle().bigText(text))
             .setContentIntent(openIntent(context))
             .setAutoCancel(true)
             .setOnlyAlertOnce(true)
-            .setColor(theme.primary)
+            .setColor(accent)
             .setCategory(Notification.CATEGORY_REMINDER)
             .build();
 
@@ -519,7 +565,8 @@ public final class NotificationScheduler {
             return false;
         }
         manager.notify(
-            newYear ? NEW_YEAR_NOTIFY_ID : BIRTHDAY_NOTIFY_ID,
+            newYear ? NEW_YEAR_NOTIFY_ID
+                : adNewYear ? AD_NEW_YEAR_NOTIFY_ID : BIRTHDAY_NOTIFY_ID,
             notification
         );
         return true;

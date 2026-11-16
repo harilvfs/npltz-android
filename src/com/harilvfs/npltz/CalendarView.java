@@ -38,6 +38,7 @@ public final class CalendarView extends View {
     private final Paint.FontMetrics fontMetrics = new Paint.FontMetrics();
     private final Path starPath = new Path();
     private final Path heartPath = new Path();
+    private final Path sparklePath = new Path();
     private final Typeface sans;
     private final Typeface sansMedium;
     private final Typeface sansBold;
@@ -60,6 +61,7 @@ public final class CalendarView extends View {
     // ad day-of-month for the visible bs month, computed once per month
     // instead of allocating a LocalDate for every cell on every draw pass.
     private final int[] adDayCache = new int[32];
+    private final int[] adMonthCache = new int[32];
     private int adCacheYear = -1;
     private int adCacheMonth = -1;
 
@@ -360,11 +362,18 @@ public final class CalendarView extends View {
             for (int d = 1; d <= Math.min(days, adDayCache.length - 1); d++) {
                 LocalDate ad = CalendarLogic.bsToAd(viewYear, viewMonth, d);
                 adDayCache[d] = ad == null ? -1 : ad.getDayOfMonth();
+                adMonthCache[d] = ad == null ? -1 : ad.getMonthValue();
             }
             adCacheYear = viewYear;
             adCacheMonth = viewMonth;
         }
         return day >= 1 && day < adDayCache.length ? adDayCache[day] : -1;
+    }
+
+    private boolean isAdNewYear(int day) {
+        adDayOfMonth(day);
+        return day >= 1 && day < adDayCache.length
+            && adMonthCache[day] == 1 && adDayCache[day] == 1;
     }
 
     @Override
@@ -668,9 +677,12 @@ public final class CalendarView extends View {
         float radius = dp(compact ? 10.5f : 19);
 
         boolean newYear = CalendarLogic.isNewYear(viewMonth, day);
+        boolean adNewYear = isAdNewYear(day);
         boolean birthday = CalendarLogic.isBirthday(viewMonth, day);
-        boolean special = newYear || birthday;
-        int accent = newYear ? theme.warning : theme.error;
+        boolean special = newYear || adNewYear || birthday;
+        int accent = newYear
+            ? theme.warning
+            : adNewYear ? theme.secondary : theme.error;
 
         if (special && !isSelected && !isToday) {
             fillCircle(canvas, centerX, circleY, radius, Theme.soft(accent, 0x12));
@@ -755,6 +767,8 @@ public final class CalendarView extends View {
             float markY = rect.centerY() + dp(27.5f);
             if (newYear) {
                 drawStar(canvas, centerX, markY, dp(3.8f), accent);
+            } else if (adNewYear) {
+                drawSparkle(canvas, centerX, markY, dp(3.6f), accent);
             } else {
                 drawHeart(canvas, centerX, markY, dp(2.9f), accent);
             }
@@ -922,6 +936,28 @@ public final class CalendarView extends View {
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(color);
         canvas.drawPath(heartPath, paint);
+    }
+
+    private void drawSparkle(Canvas canvas, float cx, float cy, float size, int color) {
+        sparklePath.reset();
+        float x = cx - size * 0.9f;
+        float y = cy + size * 0.25f;
+        sparklePath.moveTo(x, y - size);
+        sparklePath.quadTo(x, y, x + size, y);
+        sparklePath.quadTo(x, y, x, y + size);
+        sparklePath.quadTo(x, y, x - size, y);
+        sparklePath.quadTo(x, y, x, y - size);
+        float sx = cx + size * 1.1f;
+        float sy = cy - size * 0.85f;
+        float s = size * 0.32f;
+        sparklePath.moveTo(sx, sy - s);
+        sparklePath.quadTo(sx, sy, sx + s, sy);
+        sparklePath.quadTo(sx, sy, sx, sy + s);
+        sparklePath.quadTo(sx, sy, sx - s, sy);
+        sparklePath.quadTo(sx, sy, sx, sy - s);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(color);
+        canvas.drawPath(sparklePath, paint);
     }
 
     private void fillRound(Canvas canvas, RectF rect, float radius, int color) {

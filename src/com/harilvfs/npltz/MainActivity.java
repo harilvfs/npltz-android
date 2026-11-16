@@ -1070,6 +1070,16 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
             greeting.setText(ne
                 ? "शुभ नयाँ वर्ष!"
                 : "Wishing you a bright new year.");
+        } else if (ad != null && ad.getMonthValue() == 1 && ad.getDayOfMonth() == 1) {
+            iconRes = R.drawable.ic_sparkles;
+            accent = theme.secondary;
+            overline.setText(ne ? "उत्सव" : "CELEBRATION");
+            title.setText(ne
+                ? "नयाँ वर्ष " + CalendarLogic.number(ad.getYear(), true)
+                : "New Year " + ad.getYear());
+            greeting.setText(ne
+                ? "नयाँ वर्षको हार्दिक शुभकामना!"
+                : "A brand new year begins. Happy New Year!");
         } else if (CalendarLogic.isBirthday(month, day)) {
             iconRes = R.drawable.ic_cake;
             accent = theme.error;

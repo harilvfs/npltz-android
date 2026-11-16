@@ -13,6 +13,7 @@ public final class SpecialDayReceiver extends BroadcastReceiver {
         }
         String action = intent.getAction();
         if (!NotificationScheduler.ACTION_NEW_YEAR.equals(action)
+            && !NotificationScheduler.ACTION_AD_NEW_YEAR.equals(action)
             && !NotificationScheduler.ACTION_BIRTHDAY.equals(action)) {
             return;
         }
