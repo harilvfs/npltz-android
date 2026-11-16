@@ -76,7 +76,6 @@ final class GreetingWidgetSupport {
             baseTitle += 1f;
         }
         float wishSize = narrow ? 9f : 10f;
-        float clockSize = compact ? 12f : 14f;
 
         int padH = compact ? 10 : 14;
         int padV = compact ? 8 : 12;
@@ -91,11 +90,6 @@ final class GreetingWidgetSupport {
             R.id.widget_greeting_wish,
             TypedValue.COMPLEX_UNIT_SP,
             wishSize
-        );
-        views.setTextViewTextSize(
-            R.id.widget_greeting_clock,
-            TypedValue.COMPLEX_UNIT_SP,
-            clockSize
         );
         views.setViewVisibility(
             R.id.widget_greeting_wish,
@@ -142,11 +136,6 @@ final class GreetingWidgetSupport {
             views.setViewVisibility(R.id.widget_greeting_icon, View.GONE);
         }
 
-        views.setTextViewText(
-            R.id.widget_greeting_clock,
-            clockText(prefs, nepali, theme)
-        );
-        views.setTextColor(R.id.widget_greeting_clock, theme.onSurface);
         manager.updateAppWidget(appWidgetId, views);
     }
 
@@ -184,9 +173,9 @@ final class GreetingWidgetSupport {
             return;
         }
         long now = System.currentTimeMillis();
-        long next = now - now % 60000L + 60000L + 500L;
-
-        // repaint on the next minute without waking the device.
+        // no clock in the widget, so the greeting only needs to repaint on
+        // the hour without waking the device.
+        long next = now - now % 3600000L + 3600000L + 500L;
         alarms.setAndAllowWhileIdle(AlarmManager.RTC, next, tickIntent(context));
     }
 
@@ -285,47 +274,6 @@ final class GreetingWidgetSupport {
         );
     }
 
-    private static CharSequence clockText(Prefs prefs, boolean nepali, Theme theme) {
-        Calendar now = Calendar.getInstance(NEPAL);
-        int hour = now.get(Calendar.HOUR_OF_DAY);
-        int minute = now.get(Calendar.MINUTE);
-        boolean pm = hour >= 12;
-        String time;
-        String period = "";
-        if (prefs.isClock24Hour()) {
-            time = twoDigits(hour) + ":" + twoDigits(minute);
-        } else {
-            int hour12 = hour % 12;
-            if (hour12 == 0) {
-                hour12 = 12;
-            }
-            time = twoDigits(hour12) + ":" + twoDigits(minute);
-            period = pm
-                ? (nepali
-                    ? "\u0905\u092a\u0930\u093e\u0939\u094d\u0928"
-                    : "PM")
-                : (nepali
-                    ? "\u092a\u0942\u0930\u094d\u0935\u093e\u0939\u094d\u0928"
-                    : "AM");
-        }
-        if (nepali) {
-            time = CalendarLogic.toDevanagariDigits(time);
-        }
-        if (period.isEmpty()) {
-            return time;
-        }
-        SpannableStringBuilder text = new SpannableStringBuilder(
-            time + " " + period
-        );
-        text.setSpan(
-            new ForegroundColorSpan(theme.onSurfaceVariant),
-            time.length() + 1,
-            text.length(),
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        );
-        return text;
-    }
-
     private static String displayName(String raw) {
         if (raw == null) {
             return "user";
@@ -410,10 +358,6 @@ final class GreetingWidgetSupport {
 
     private static int pendingFlags() {
         return PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE;
-    }
-
-    private static String twoDigits(int value) {
-        return value < 10 ? "0" + value : String.valueOf(value);
     }
 
     private static int dp(Context context, float value) {
