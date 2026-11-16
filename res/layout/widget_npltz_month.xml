@@ -52,6 +52,7 @@
                     android:fontFamily="@font/inter_medium"
                     android:letterSpacing="0.08"
                     android:text="Npltz"
+                    android:textColor="#FF89B4FA"
                     android:textSize="11sp" />
 
                 <TextView
@@ -63,6 +64,7 @@
                     android:fontFamily="@font/inter_medium"
                     android:maxLines="1"
                     android:text="Kartik 2083"
+                    android:textColor="#FFCDD6F4"
                     android:textSize="22sp" />
             </LinearLayout>
 
@@ -79,6 +81,7 @@
                     android:fontFamily="@font/inter_medium"
                     android:letterSpacing="0.12"
                     android:text="BS"
+                    android:textColor="#FF8A90A9"
                     android:textSize="10sp" />
 
                 <TextView
@@ -88,6 +91,7 @@
                     android:layout_marginTop="2dp"
                     android:fontFamily="@font/inter_regular"
                     android:text="November 2026"
+                    android:textColor="#FF8A90A9"
                     android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>

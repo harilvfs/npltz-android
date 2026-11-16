@@ -59,6 +59,7 @@
                 android:fontFamily="@font/inter_medium"
                 android:letterSpacing="0.08"
                 android:text="Npltz"
+                android:textColor="#FF89B4FA"
                 android:textSize="13sp" />
 
             <TextView
@@ -73,6 +74,7 @@
                 android:fontFamily="@font/inter_medium"
                 android:letterSpacing="0.12"
                 android:text="BS"
+                android:textColor="#FF8A90A9"
                 android:textSize="10sp" />
         </LinearLayout>
 
@@ -97,6 +99,7 @@
                 android:fontFamily="@font/inter_medium"
                 android:includeFontPadding="false"
                 android:text="23"
+                android:textColor="#FF89B4FA"
                 android:textSize="40sp" />
 
             <LinearLayout
@@ -115,6 +118,7 @@
                     android:fontFamily="@font/inter_regular"
                     android:maxLines="1"
                     android:text="Sombar"
+                    android:textColor="#FF8A90A9"
                     android:textSize="11sp" />
 
                 <TextView
@@ -125,6 +129,7 @@
                     android:fontFamily="@font/inter_medium"
                     android:maxLines="1"
                     android:text="Kartik 2083"
+                    android:textColor="#FFCDD6F4"
                     android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
@@ -142,6 +147,7 @@
             android:fontFamily="@font/inter_regular"
             android:maxLines="1"
             android:text="AD Monday, November 9, 2026"
+            android:textColor="#FF8A90A9"
             android:textSize="11sp" />
     </LinearLayout>
 </FrameLayout>
