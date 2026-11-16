@@ -529,7 +529,9 @@ public final class NotificationScheduler {
         Prefs prefs = new Prefs(context);
 
         if (prefs.isPersistentNotifyEnabled()) {
-            showPersistent(context);
+            // force a rebuild so theme and language changes repaint the
+            // notification even though the date has not changed.
+            showPersistent(context, true);
         }
         NotificationManager manager =
             (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -550,11 +552,17 @@ public final class NotificationScheduler {
 
     // a foreground service keeps the date in the shade after the task is swiped away.
     public static boolean showPersistent(Context context) {
+        return showPersistent(context, false);
+    }
+
+    private static boolean showPersistent(Context context, boolean force) {
         createChannel(context);
         if (!canNotify(context, CHANNEL_ID_PERSISTENT)) {
             return false;
         }
-        return DateNotificationService.start(context);
+        return force
+            ? DateNotificationService.restart(context)
+            : DateNotificationService.start(context);
     }
 
     static Notification buildPersistentNotification(Context context) {

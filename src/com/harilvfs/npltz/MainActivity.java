@@ -1961,6 +1961,7 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
             return;
         }
         prefs.setTheme(option.key);
+        NotificationScheduler.refresh(this);
         WidgetSupport.refreshAll(this);
         recreate();
     }

@@ -25,6 +25,13 @@ public final class DateNotificationService extends Service {
         }
     }
 
+    // rebuilds the notification even when the date has not changed, e.g.
+    // after a theme or language change from the settings screen.
+    static boolean restart(Context context) {
+        shownDate = null;
+        return start(context);
+    }
+
     static void stop(Context context) {
         context.stopService(new Intent(context, DateNotificationService.class));
     }
