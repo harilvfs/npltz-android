@@ -66,7 +66,7 @@ jobs:
         run: python3 build.py
 
       - name: Upload APK
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: npltz-android
           path: dist/npltz-android.apk
