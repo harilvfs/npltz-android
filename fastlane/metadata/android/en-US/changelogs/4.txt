@@ -4,3 +4,4 @@ Recover the persistent date notification after miui kills it
 Enable r8 minification, resource shrinking and locale filtering (#9)
 Add a hand-written baseline profile for faster cold starts (#10)
 Write the fastlane changelog per versioncode
+Add packaging recipe and clean fastlane changelog output

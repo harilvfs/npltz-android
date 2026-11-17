@@ -27,6 +27,8 @@
 
 - [b6de797](https://github.com/harilvfs/npltz-android/commit/b6de797c047d7d86bc65f2c4a46e6e06783662a1)  *(release)* Write the fastlane changelog per versioncode by @harilvfs
 
+- [c9dc93c](https://github.com/harilvfs/npltz-android/commit/c9dc93c689c7e97848e135a5b5578a59dbd19348)  *(fdroid)* Add packaging recipe and clean fastlane changelog output by @harilvfs
+
 
 
 ## [1.1.0](https://github.com/harilvfs/npltz-android/compare/v1.0.0...v1.1.0) - 2026-11-17
