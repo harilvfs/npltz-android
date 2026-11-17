@@ -97,7 +97,7 @@ dependencies installed on your system:
 ### Requirements
 
 - JDK 17 or newer
-- Android SDK: platform 35, build-tools 35.0.0 and platform-tools
+- Android SDK: platform 35, build-tools 36.0.0 and platform-tools
 - `python3`
 - `adb` (platform-tools) only if you want to install with `build.py --install`
 
@@ -177,7 +177,7 @@ changed, and how you tested it. Avoid unrelated changes in the same PR. For
 larger changes, open an issue first.
 
 To work on the project you need JDK 17+, an Android SDK with platform 35 and
-build-tools 35.0.0, and `python3`. Run `python3 build.py` before opening a PR;
+build-tools 36.0.0, and `python3`. Run `python3 build.py` before opening a PR;
 it runs the JVM calendar tests and builds the APK. Test the app on a device or
 emulator, and include a screenshot or short recording for UI changes.
 
