@@ -88,7 +88,22 @@ jobs:
         run: |
           CODE=$(grep -oP 'versionCode \K[0-9]+' build.gradle)
           FILE="fastlane/metadata/android/en-US/changelogs/${CODE}.txt"
-          sed -n 's/^- \[[0-9a-f]*\]([^)]*) //p' BODY.md > "$FILE"
+          python3 - "$FILE" <<'EOF'
+          import re, sys
+          out = []
+          for line in open("BODY.md"):
+              line = line.strip()
+              if not line.startswith("- "):
+                  continue
+              body = line[2:]
+              body = re.sub(r"^\[[0-9a-f]{7}\]\([^)]*\)\s*", "", body)
+              body = re.sub(r" in \[#[0-9]+\]\([^)]*\)", "", body)
+              body = re.sub(r"\*\(([^)]*)\)\* ", "", body)
+              body = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", body)
+              body = re.sub(r" by @[A-Za-z0-9_.-]+", "", body)
+              out.append(body.strip())
+          open(sys.argv[1], "w").write("\n".join(out) + "\n")
+          EOF
           echo "fastlane changelog for versionCode $CODE:"
           cat "$FILE"
 

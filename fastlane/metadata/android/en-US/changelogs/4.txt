@@ -1,6 +1,6 @@
- *(ui)* Add in-app changelog page and auto-update changelog on release (#8) by @harilvfs in [#8](https://github.com/harilvfs/npltz-android/pull/8)
- *(ui)* Add the everforest theme and sort the theme list by @harilvfs
- *(notifications)* Recover the persistent date notification after miui kills it by @harilvfs
-Enable r8 minification, resource shrinking and locale filtering (#9) by @harilvfs in [#9](https://github.com/harilvfs/npltz-android/pull/9)
-Add a hand-written baseline profile for faster cold starts (#10) by @harilvfs in [#10](https://github.com/harilvfs/npltz-android/pull/10)
- *(release)* Write the fastlane changelog per versioncode by @harilvfs
+Add in-app changelog page and auto-update changelog on release (#8)
+Add the everforest theme and sort the theme list
+Recover the persistent date notification after miui kills it
+Enable r8 minification, resource shrinking and locale filtering (#9)
+Add a hand-written baseline profile for faster cold starts (#10)
+Write the fastlane changelog per versioncode

@@ -1,0 +1,32 @@
+# f-droid packaging recipe for npltz.
+# lives in the fdroiddata repo (https://gitlab.com/fdroid/fdroiddata) as
+# metadata/com.harilvfs.npltz.yml, not in the app repository.
+
+Categories:
+  - Utilities
+
+License: GPL-3.0
+
+AuthorName: Hari Chalise
+AuthorEmail: harilvfs@chalisehari.com.np
+
+SourceCode: https://github.com/harilvfs/npltz-android
+IssueTracker: https://github.com/harilvfs/npltz-android/issues
+
+AutoName: Npltz
+
+RepoType: git
+Repo: https://github.com/harilvfs/npltz-android
+
+Builds:
+  - versionName: 1.2.0
+    versionCode: 4
+    commit: v1.2.0
+    gradle:
+      - yes
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+
+CurrentVersion: 1.2.0
+CurrentVersionCode: 4
