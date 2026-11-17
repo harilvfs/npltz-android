@@ -6,7 +6,7 @@ Npltz is a clean, native Nepali (Bikram Sambat) calendar for Android, built with
 - Daily date notification and an optional permanent notification
 - Calendar marks for the Nepali New Year, the Gregorian New Year
 - Date, month and greeting home-screen widgets
-- Eight Material You themes, three fonts, four text sizes and English/Nepali scripts
+- Nine Material You themes, three fonts, four text sizes and English/Nepali scripts
 
 Everything runs offline. The BS calendar data is compiled into the app, so there is no API, no account, no ads, no analytics and no tracking. The table covers 1975–2090 BS.
 

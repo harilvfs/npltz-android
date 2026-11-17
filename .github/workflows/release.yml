@@ -68,15 +68,6 @@ jobs:
       - name: Build and test
         run: python3 build.py
 
-      - name: Commit version changes
-        if: ${{ github.event.inputs.update_version == 'true' }}
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add build.gradle CHANGELOG.md
-          git commit -m "chore(release): bump version"
-          git push
-
       - name: Generate changelog
         uses: orhun/git-cliff-action@v4
         with:
@@ -91,6 +82,24 @@ jobs:
         run: |
           sed -i '/^## \[unreleased\]/d' BODY.md
           printf "## What's Changed\n\n%s\n" "$(cat BODY.md)" > BODY.md
+
+      - name: Write fastlane changelog
+        if: ${{ github.event.inputs.update_version == 'true' }}
+        run: |
+          CODE=$(grep -oP 'versionCode \K[0-9]+' build.gradle)
+          FILE="fastlane/metadata/android/en-US/changelogs/${CODE}.txt"
+          sed -n 's/^- \[[0-9a-f]*\]([^)]*) //p' BODY.md > "$FILE"
+          echo "fastlane changelog for versionCode $CODE:"
+          cat "$FILE"
+
+      - name: Commit version changes
+        if: ${{ github.event.inputs.update_version == 'true' }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add build.gradle CHANGELOG.md fastlane/
+          git commit -m "chore(release): bump version"
+          git push
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v3
