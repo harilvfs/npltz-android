@@ -1,0 +1,50 @@
+# hand-written baseline profile for npltz.
+#
+# lists the classes and methods on the app's cold start path so art
+# pre-compiles them at install time instead of jitting them on the first
+# launch. startup path: mainactivity inflate + calendarview + calendar data
+# init + the onResume notification/widget/clock refreshes.
+#
+# rules:
+#   Lcom/x/Class;                      every method of the class
+#   HSPLcom/x/Class;->name(sig)Ret     startup + hot method
+
+# startup methods of the activity, in launch order
+HSPLcom/harilvfs/npltz/MainActivity;-><init>()V
+HSPLcom/harilvfs/npltz/MainActivity;->onCreate(Landroid/os/Bundle;)V
+HSPLcom/harilvfs/npltz/MainActivity;->onStart()V
+HSPLcom/harilvfs/npltz/MainActivity;->onResume()V
+HSPLcom/harilvfs/npltz/MainActivity;->onPostResume()V
+HSPLcom/harilvfs/npltz/MainActivity;->restoreState(Landroid/os/Bundle;)V
+HSPLcom/harilvfs/npltz/MainActivity;->bindViews()V
+HSPLcom/harilvfs/npltz/MainActivity;->setupUi()V
+HSPLcom/harilvfs/npltz/MainActivity;->refreshChrome()V
+HSPLcom/harilvfs/npltz/MainActivity;->refreshGreeting()V
+HSPLcom/harilvfs/npltz/MainActivity;->refreshSummaries()V
+HSPLcom/harilvfs/npltz/MainActivity;->refreshAutostartRow()V
+HSPLcom/harilvfs/npltz/MainActivity;->applySettingsInsets(Landroidx/core/graphics/Insets;)V
+HSPLcom/harilvfs/npltz/MainActivity;->applyAboutInsets(Landroidx/core/graphics/Insets;)V
+HSPLcom/harilvfs/npltz/MainActivity;->applyChangelogInsets(Landroidx/core/graphics/Insets;)V
+HSPLcom/harilvfs/npltz/MainActivity;->appVersion()Ljava/lang/String;
+
+# calendar core: data tables and date math run before the first frame
+Lcom/harilvfs/npltz/CalendarData;
+Lcom/harilvfs/npltz/CalendarLogic;
+Lcom/harilvfs/npltz/NepaliDate;
+
+# first-frame view work
+Lcom/harilvfs/npltz/CalendarView;
+Lcom/harilvfs/npltz/NepalClockView;
+
+# onResume side work: prefs, theme, widgets refresh, persistent notification
+Lcom/harilvfs/npltz/Prefs;
+Lcom/harilvfs/npltz/Theme;
+Lcom/harilvfs/npltz/Ui;
+Lcom/harilvfs/npltz/EventStore;
+Lcom/harilvfs/npltz/NotificationScheduler;
+Lcom/harilvfs/npltz/DateNotificationService;
+Lcom/harilvfs/npltz/WidgetSupport;
+Lcom/harilvfs/npltz/GreetingWidgetSupport;
+
+# needed for aot on the r8-minified build
+Landroidx/profileinstaller/ProfileInstallerReceiver;
