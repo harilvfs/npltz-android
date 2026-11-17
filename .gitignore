@@ -2,6 +2,7 @@ build/
 dist/
 .gradle/
 assets/calendar_data.json
+assets/changelog.md
 local.properties
 .idea/
 *.iml

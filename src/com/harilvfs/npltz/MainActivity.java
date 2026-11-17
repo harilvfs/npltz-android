@@ -77,7 +77,6 @@ import java.util.Set;
 
 public final class MainActivity extends AppCompatActivity implements CalendarView.Host {
     private static final int REQUEST_NOTIFICATIONS = 2081;
-    private static final String VERSION = "1.1.0";
     private static final String TUI_REPO_URL = "https://github.com/harilvfs/npltz";
     private static final String ANDROID_REPO_URL = "https://github.com/harilvfs/npltz-android";
     private static final String DEV_GITHUB_URL = "https://github.com/harilvfs";
@@ -93,6 +92,7 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
     private static final String KEY_MODE = "calendar_mode";
     private static final String KEY_SETTINGS = "settings_open";
     private static final String KEY_ABOUT = "about_open";
+    private static final String KEY_CHANGELOG = "changelog_open";
 
     private Prefs prefs;
     private Theme theme;
@@ -147,10 +147,18 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
     private LinearLayout aboutList;
     private TextView aboutFooter;
 
+    private View changelogHost;
+    private View changelogOverlay;
+    private MaterialToolbar changelogToolbar;
+    private androidx.core.widget.NestedScrollView changelogScroll;
+    private LinearLayout changelogList;
+    private TextView changelogText;
+
     private CalendarView calendar;
     private final Set<String> eventDays = new HashSet<>();
     private boolean settingsOpen;
     private boolean aboutOpen;
+    private boolean changelogOpen;
     private boolean syncingModeTabs;
     private boolean suppressChromeAnimation;
     private String lastHeadline;
@@ -246,6 +254,7 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
         settingsOverlay = findViewById(R.id.settings_overlay);
         settingsHost = findViewById(R.id.settings_host);
         aboutHost = findViewById(R.id.about_host);
+        changelogHost = findViewById(R.id.changelog_host);
         if (settingsOverlay != null) {
             bindSettingsViews();
         }
@@ -260,6 +269,7 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
         rootView.postDelayed(() -> {
             ensureSettings();
             ensureAbout();
+            ensureChangelog();
         }, 800);
     }
 
@@ -351,6 +361,10 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
+                if (changelogOpen) {
+                    closeChangelog();
+                    return;
+                }
                 if (aboutOpen) {
                     closeAbout();
                     return;
@@ -384,6 +398,7 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
         settingsRow(R.id.row_reminder, this::openReminderDialog);
         settingsRow(R.id.row_autostart, this::openAutostartSettings);
         settingsRow(R.id.row_about, this::openAbout);
+        settingsRow(R.id.row_changelog, this::openChangelog);
         settingsRow(R.id.row_tui_repo, () -> openUrl(TUI_REPO_URL));
         settingsRow(R.id.row_android_repo, () -> openUrl(ANDROID_REPO_URL));
         settingsRow(R.id.row_report_issue, () -> openUrl(DEV_ISSUES_URL));
@@ -496,6 +511,7 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
         }
         outState.putBoolean(KEY_SETTINGS, settingsOpen);
         outState.putBoolean(KEY_ABOUT, aboutOpen);
+        outState.putBoolean(KEY_CHANGELOG, changelogOpen);
     }
 
     private void restoreState(Bundle state) {
@@ -516,6 +532,9 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
         }
         if (state.getBoolean(KEY_ABOUT, false)) {
             openAbout(false);
+        }
+        if (state.getBoolean(KEY_CHANGELOG, false)) {
+            openChangelog(false);
         }
     }
 
@@ -753,7 +772,7 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
         }
         refreshAutostartRow();
         if (settingsFooter != null) {
-            settingsFooter.setText("Npltz for Android \u00b7 " + VERSION);
+            settingsFooter.setText("Npltz for Android \u00b7 " + appVersion());
         }
     }
 
@@ -2173,7 +2192,7 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
         row(aboutOverlay, R.id.link_website, link);
 
         if (aboutFooter != null) {
-            aboutFooter.setText("Npltz for Android \u00b7 " + VERSION);
+            aboutFooter.setText("Npltz for Android \u00b7 " + appVersion());
         }
         if (lastBars != null) {
             applyAboutInsets(lastBars);
@@ -2248,11 +2267,98 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
             .start();
     }
 
+    // ------------------------------------------------------------- changelog
+
+    private void ensureChangelog() {
+        if (changelogOverlay != null || changelogHost == null) {
+            return;
+        }
+        changelogOverlay = getLayoutInflater().inflate(
+            R.layout.view_changelog, (ViewGroup) changelogHost, false
+        );
+        ((ViewGroup) changelogHost).addView(changelogOverlay);
+        changelogToolbar = changelogOverlay.findViewById(R.id.changelog_toolbar);
+        changelogScroll = changelogOverlay.findViewById(R.id.changelog_scroll);
+        changelogList = changelogOverlay.findViewById(R.id.changelog_list);
+        changelogText = changelogOverlay.findViewById(R.id.changelog_text);
+        Ui.applyTypography(changelogOverlay);
+        changelogToolbar.setNavigationOnClickListener(view -> closeChangelog());
+
+        TextView changelogLink = changelogOverlay.findViewById(R.id.changelog_link);
+        changelogLink.setOnClickListener(
+            view -> openUrl(ANDROID_REPO_URL + "/blob/main/CHANGELOG.md")
+        );
+
+        CharSequence rendered = Changelog.load(this);
+        if (rendered != null) {
+            changelogText.setText(rendered);
+        } else {
+            changelogText.setText(R.string.changelog_empty);
+        }
+        if (lastBars != null) {
+            applyChangelogInsets(lastBars);
+        }
+    }
+
+    private void openChangelog() {
+        openChangelog(true);
+    }
+
+    private void openChangelog(boolean animate) {
+        if (changelogHost == null) {
+            return;
+        }
+        ensureChangelog();
+        if (changelogOverlay == null) {
+            return;
+        }
+        changelogOpen = true;
+        syncChrome();
+        changelogHost.setVisibility(View.VISIBLE);
+        changelogOverlay.setVisibility(View.VISIBLE);
+        changelogOverlay.bringToFront();
+        if (animate) {
+            changelogOverlay.setAlpha(0f);
+            changelogOverlay.setTranslationY(dp(12));
+            changelogOverlay.animate()
+                .alpha(1f)
+                .translationY(0f)
+                .withLayer()
+                .setDuration(200)
+                .start();
+        } else {
+            changelogOverlay.setAlpha(1f);
+            changelogOverlay.setTranslationY(0f);
+        }
+    }
+
+    private void closeChangelog() {
+        if (changelogOverlay == null) {
+            return;
+        }
+        changelogOpen = false;
+        changelogOverlay.animate()
+            .alpha(0f)
+            .translationY(dp(12))
+            .withLayer()
+            .setDuration(140)
+            .withEndAction(() -> {
+                changelogOverlay.setVisibility(View.GONE);
+                changelogOverlay.setAlpha(1f);
+                changelogOverlay.setTranslationY(0f);
+                if (changelogHost != null) {
+                    changelogHost.setVisibility(View.GONE);
+                }
+                syncChrome();
+            })
+            .start();
+    }
+
     private void syncChrome() {
         if (bottomActions == null) {
             return;
         }
-        if (settingsOpen || aboutOpen) {
+        if (settingsOpen || aboutOpen || changelogOpen) {
             hideBottomBar();
         } else {
             showBottomBar();
@@ -2270,7 +2376,7 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
             .withLayer()
             .setDuration(130)
             .withEndAction(() -> {
-                if ((settingsOpen || aboutOpen)
+                if ((settingsOpen || aboutOpen || changelogOpen)
                     && bottomActions.getVisibility() == View.VISIBLE) {
                     bottomActions.setVisibility(View.GONE);
                 }
@@ -2326,8 +2432,48 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
         );
     }
 
-    private void openUrl(String url) {
+    private void applyChangelogInsets(androidx.core.graphics.Insets bars) {
+        if (changelogToolbar == null) {
+            return;
+        }
+        int baseActionBar = actionBarSize();
+        ViewGroup.LayoutParams changelogToolbarParams =
+            changelogToolbar.getLayoutParams();
+        if (changelogToolbarParams != null) {
+            changelogToolbarParams.height = baseActionBar + bars.top;
+            changelogToolbar.setLayoutParams(changelogToolbarParams);
+        }
+        changelogToolbar.setPadding(
+            dp(8) + bars.left,
+            bars.top,
+            dp(8) + bars.right,
+            0
+        );
+        changelogList.setPadding(
+            dp(20) + bars.left,
+            dp(8),
+            dp(20) + bars.right,
+            0
+        );
+        changelogScroll.setPadding(
+            0,
+            0,
+            0,
+            dp(32) + bars.bottom
+        );
+    }
+
+    // keep the version in sync with build.gradle automatically, the release
+    // workflow bumps it there and the apk reports its own versionName.
+    private String appVersion() {
         try {
+            return getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException exception) {
+            return "";
+        }
+    }
+
+    private void openUrl(String url) {        try {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
@@ -2343,7 +2489,7 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
             + "Expected behaviour:\n(what did you expect to happen?)\n\n\n"
             + "Actual behaviour:\n(what actually happened?)\n\n\n"
             + "--------------------------------\n"
-            + "App version: Npltz for Android " + VERSION + "\n"
+            + "App version: Npltz for Android " + appVersion() + "\n"
             + "Device: " + Build.MANUFACTURER + " " + Build.MODEL + "\n"
             + "Android: " + Build.VERSION.RELEASE + " (SDK " + Build.VERSION.SDK_INT + ")\n";
         Uri uri = Uri.parse(DEV_EMAIL_URL)
@@ -2444,6 +2590,9 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
             }
             if (aboutOverlay != null) {
                 applyAboutInsets(bars);
+            }
+            if (changelogOverlay != null) {
+                applyChangelogInsets(bars);
             }
 
             ViewGroup.LayoutParams raw = bottomActions.getLayoutParams();

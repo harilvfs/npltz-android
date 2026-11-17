@@ -43,6 +43,16 @@ jobs:
           CODE=$(grep -oP 'versionCode \K[0-9]+' build.gradle)
           sed -i "s/versionCode .*/versionCode $((CODE + 1))/" build.gradle
 
+      - name: Regenerate CHANGELOG.md
+        uses: orhun/git-cliff-action@v4
+        with:
+          version: "v2.13.1"
+          config: cliff.toml
+          args: -o CHANGELOG.md
+        env:
+          OUTPUT: CHANGELOG.md
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Set up JDK 17
         uses: actions/setup-java@v6
         with:
@@ -63,7 +73,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add build.gradle
+          git add build.gradle CHANGELOG.md
           git commit -m "chore(release): bump version"
           git push
 
