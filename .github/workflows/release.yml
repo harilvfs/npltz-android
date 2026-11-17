@@ -1,26 +1,47 @@
 name: Release
 
 on:
-  push:
-    tags: ['v*']
   workflow_dispatch:
     inputs:
-      version:
-        description: 'Tag to release, e.g. v1.0.0 (the tag is created for you)'
+      tag_version:
+        description: 'Release tag (e.g., v1.1.1)'
         required: true
+        type: string
+      tag_title:
+        description: 'Release title (e.g., v1.1.1@Y-M-D)'
+        required: true
+        type: string
+      update_version:
+        description: 'Do you want to update the version in the repository?'
+        required: true
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
 jobs:
   release:
-    name: Build APK and publish release
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up version variables
+        run: |
+          VERSION=$(echo "${{ github.event.inputs.tag_version }}" | sed 's/^v//')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Update build.gradle version
+        if: ${{ github.event.inputs.update_version == 'true' }}
+        run: |
+          sed -i "s/versionName \".*\"/versionName \"$VERSION\"/" build.gradle
+          CODE=$(grep -oP 'versionCode \K[0-9]+' build.gradle)
+          sed -i "s/versionCode .*/versionCode $((CODE + 1))/" build.gradle
 
       - name: Set up JDK 17
         uses: actions/setup-java@v6
@@ -37,27 +58,45 @@ jobs:
       - name: Build and test
         run: python3 build.py
 
-      - name: Generate release notes with git-cliff
+      - name: Commit version changes
+        if: ${{ github.event.inputs.update_version == 'true' }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add build.gradle
+          git commit -m "chore(release): bump version"
+          git push
+
+      - name: Generate changelog
         uses: orhun/git-cliff-action@v4
         with:
           version: "v2.13.1"
           config: cliff.toml
-          args: --latest --strip header
+          args: --unreleased --strip header
         env:
           OUTPUT: BODY.md
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Add release header
         run: |
-          sed -i '/^## \[/d' BODY.md
+          sed -i '/^## \[unreleased\]/d' BODY.md
           printf "## What's Changed\n\n%s\n" "$(cat BODY.md)" > BODY.md
 
-      - name: Publish release
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TAG: ${{ inputs.version || github.ref_name }}
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ github.event.inputs.tag_version }}
+          name: ${{ github.event.inputs.tag_title }}
+          draft: false
+          prerelease: ${{ github.event.inputs.update_version != 'true' }}
+          generate_release_notes: false
+          body_path: BODY.md
+
+      - name: Upload APK asset
         run: |
-          gh release create "$TAG" \
-            --title "npltz for android $TAG" \
-            --notes-file BODY.md \
-            dist/npltz-android.apk
+          sha256sum dist/npltz-android.apk > dist/npltz-android.apk.sha256
+          gh release upload ${{ github.event.inputs.tag_version }} \
+            dist/npltz-android.apk \
+            dist/npltz-android.apk.sha256
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

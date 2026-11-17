@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Release tag (e.g. v1.0.0)'
+        description: 'Release tag (e.g. 1.1.1)'
         required: true
       target_branch:
         description: 'Target branch for the PR'
@@ -44,14 +44,14 @@ jobs:
 
       - name: Create Pull Request
         id: create_changelog_pr
-        uses: peter-evans/create-pull-request@v8.1.1
+        uses: peter-evans/create-pull-request@v8.1.3
         with:
           token: ${{ secrets.PAT_TOKEN }}
-          commit-message: "chore(release): update changelog for ${{ github.event.inputs.version }}"
+          commit-message: "chore(release): update changelog for v${{ github.event.inputs.version }}"
           branch: changelog/${{ github.event.inputs.version }}
-          title: "changelog for ${{ github.event.inputs.version }}"
+          title: "changelog for v${{ github.event.inputs.version }}"
           body: |
-            changelog for version ${{ github.event.inputs.version }}.
+            changelog for version v${{ github.event.inputs.version }}.
           base: ${{ github.event.inputs.target_branch }}
           delete-branch: false
 
