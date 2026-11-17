@@ -13,6 +13,12 @@ android {
         targetSdk 35
         versionCode 3
         versionName "1.1.0"
+
+        // strip every locale the material libraries bundle except english
+        // and nepali, the app translates strings itself at runtime.
+        androidResources {
+            localeFilters += ["en", "ne"]
+        }
     }
 
     compileOptions {
@@ -34,10 +40,14 @@ android {
             applicationIdSuffix ""
             versionNameSuffix ""
             debuggable false
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
         release {
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }
 
