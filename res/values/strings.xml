@@ -41,6 +41,9 @@
     <string name="daily_reminder">Daily reminder</string>
     <string name="about_npltz">About Npltz</string>
     <string name="about">About</string>
+    <string name="changelog">Changelog</string>
+    <string name="changelog_empty">No changelog available yet.</string>
+    <string name="changelog_source">View the full changelog on GitHub</string>
     <string name="tui_app">TUI app</string>
     <string name="android_app">Android app</string>
     <string name="star_note">If Npltz is useful to you in any way, you can support me by starring the repo.</string>

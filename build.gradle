@@ -53,6 +53,7 @@ dependencies {
 
 def calendarJson = file("data/calendar_data.json")
 def calendarSource = file("src/com/harilvfs/npltz/CalendarData.java")
+def changelogFile = file("CHANGELOG.md")
 
 tasks.register("generateCalendarData", Exec) {
     inputs.file(calendarJson)
@@ -65,8 +66,15 @@ tasks.register("copyCalendarAsset", Copy) {
     into "assets"
 }
 
+tasks.register("copyChangelogAsset", Copy) {
+    onlyIf { changelogFile.exists() }
+    from changelogFile
+    into "assets"
+    rename { "changelog.md" }
+}
+
 tasks.named("preBuild").configure {
-    dependsOn "generateCalendarData", "copyCalendarAsset"
+    dependsOn "generateCalendarData", "copyCalendarAsset", "copyChangelogAsset"
 }
 
 def appClasses = layout.buildDirectory.dir(
