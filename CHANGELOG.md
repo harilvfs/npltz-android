@@ -1,11 +1,56 @@
 
-## [unreleased]
+## [1.1.0](https://github.com/harilvfs/npltz-android/compare/v1.0.0...v1.1.0) - 2026-11-17
+
+
+### 🚀 Features
+
+
+- [91c2d03](https://github.com/harilvfs/npltz-android/commit/91c2d033681053bb33008b6ee6c7efc3bd4473e9) Autostart row with a why note by @harilvfs
+
+- [02c32f3](https://github.com/harilvfs/npltz-android/commit/02c32f384e9c168da203cae0b71bc2f2c65a4cfd) Remove the clock from the greeting widget by @harilvfs
+
+- [771f9f4](https://github.com/harilvfs/npltz-android/commit/771f9f49d489c8ccf2b0ba8a40f35731cd1ecf86) Celebrate the gregorian new year on january 1 by @harilvfs
+
+- [64fb5fe](https://github.com/harilvfs/npltz-android/commit/64fb5fe40a483351b2f69822bfdff8a04ae2b407) Rename the birthday title to developer birthday by @harilvfs
+
+
+
+### 🐛 Bug Fixes
+
+
+- [7d67a00](https://github.com/harilvfs/npltz-android/commit/7d67a004e6f518167103b119b264bf6bfdd74ed8) Themed widget fallback during the boot window by @harilvfs
+
+- [5d87981](https://github.com/harilvfs/npltz-android/commit/5d87981b2c37c36952e7680aa0188ce2b9514c40) Repaint notifications on theme and language change by @harilvfs
+
 
 
 ### 📚 Documentation
 
 
 - [9a4830d](https://github.com/harilvfs/npltz-android/commit/9a4830d362def99c959fd34f7b6d81ab37488a1b) Add security policy by @harilvfs
+
+- [fd702e8](https://github.com/harilvfs/npltz-android/commit/fd702e88a6d25c603f68c395bbaec8f995cb002c) Note miui autostart requirement by @harilvfs
+
+- [81d2a0f](https://github.com/harilvfs/npltz-android/commit/81d2a0ff9a5f57e38c1f527dfa96962ecd9a38d3) Notification and widget home previews by @harilvfs
+
+- [3a9b3b6](https://github.com/harilvfs/npltz-android/commit/3a9b3b6713ddf3e0784eaac1405e1d6c9934ced4) Fix stretched notification preview and restore events by @harilvfs
+
+- [a59ad6e](https://github.com/harilvfs/npltz-android/commit/a59ad6e758934941e88048f38d7dd69ccf055192) Move the notification preview to the end by @harilvfs
+
+- [f9d7c21](https://github.com/harilvfs/npltz-android/commit/f9d7c21bd12cc75a3df0a84ed443330c9540a3fa) Bust cached preview images by @harilvfs
+
+- [4bb4875](https://github.com/harilvfs/npltz-android/commit/4bb4875eb323ca91d4e06c109e7b88ab5075cec2) Finalize readme and add fastlane metadata by @harilvfs
+
+
+
+### ⚙️ Miscellaneous Tasks
+
+
+- [b0525e4](https://github.com/harilvfs/npltz-android/commit/b0525e472ca1f174753cf0d88f401e73ce70c584) Build release notes from the tagged version by @harilvfs
+
+- [ca236f0](https://github.com/harilvfs/npltz-android/commit/ca236f0a57f9cc8423113e4365b166031b161971) Add dependabot for gradle and action bumps by @harilvfs
+
+- [9ff7cd8](https://github.com/harilvfs/npltz-android/commit/9ff7cd8e1f45d5c22071a9f674a742247273caf6)  *(ci)* Follow npltz/carch release pattern and reset version to 1.0.0 by @harilvfs
 
 
 
