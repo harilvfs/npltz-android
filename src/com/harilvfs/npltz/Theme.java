@@ -140,8 +140,16 @@ public final class Theme {
         R.style.ThemeOverlay_Npltz_RosePine
     );
 
+    public static final Theme EVERFOREST = new Theme(
+        "everforest", "Everforest",
+        0xFF2D353B, 0xFFD3C6AA, 0xFFA7C080, 0xFF7FBBB3,
+        0xFFA7C080, 0xFFE69875, 0xFFDBBC7F, 0xFFE67E80,
+        R.style.ThemeOverlay_Npltz_Everforest
+    );
+
     public static final Theme[] ALL = {
-        PLAIN_DARK, WARM, LIGHT, CATPPUCCIN, DRACULA, GRUVBOX, NORD, ROSE_PINE,
+        CATPPUCCIN, DRACULA, EVERFOREST, GRUVBOX, LIGHT, NORD, PLAIN_DARK,
+        ROSE_PINE, WARM,
     };
 
     public static Theme byKey(String key) {

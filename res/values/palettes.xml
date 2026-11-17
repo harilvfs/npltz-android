@@ -297,6 +297,43 @@
     <color name="rose_pine_warning">#FFF6C177</color>
     <color name="rose_pine_yellow">#FFF6C177</color>
 
+    <color name="everforest_primary">#FFA7C080</color>
+    <color name="everforest_on_primary">#FF2D353B</color>
+    <color name="everforest_primary_container">#FF4A564C</color>
+    <color name="everforest_on_primary_container">#FFD3C6AA</color>
+    <color name="everforest_secondary">#FF7FBBB3</color>
+    <color name="everforest_on_secondary">#FF2D353B</color>
+    <color name="everforest_secondary_container">#FF3F5255</color>
+    <color name="everforest_on_secondary_container">#FFD3C6AA</color>
+    <color name="everforest_tertiary">#FF7FBBB3</color>
+    <color name="everforest_on_tertiary">#FF2D353B</color>
+    <color name="everforest_tertiary_container">#FF3F5255</color>
+    <color name="everforest_on_tertiary_container">#FFD3C6AA</color>
+    <color name="everforest_surface">#FF2D353B</color>
+    <color name="everforest_on_surface">#FFD3C6AA</color>
+    <color name="everforest_surface_variant">#FF3C4245</color>
+    <color name="everforest_on_surface_variant">#FF948F80</color>
+    <color name="everforest_surface_inverse">#FFD3C6AA</color>
+    <color name="everforest_on_surface_inverse">#FF2D353B</color>
+    <color name="everforest_surface_bright">#FF434B51</color>
+    <color name="everforest_surface_dim">#FF283035</color>
+    <color name="everforest_surface_container_lowest">#FF262D32</color>
+    <color name="everforest_surface_container_low">#FF32393E</color>
+    <color name="everforest_surface_container">#FF373E42</color>
+    <color name="everforest_surface_container_high">#FF3C4245</color>
+    <color name="everforest_surface_container_highest">#FF434849</color>
+    <color name="everforest_outline">#FF5F615C</color>
+    <color name="everforest_outline_variant">#FF44494B</color>
+    <color name="everforest_error">#FFE67E80</color>
+    <color name="everforest_on_error">#FFD3C6AA</color>
+    <color name="everforest_error_container">#FF524449</color>
+    <color name="everforest_on_error_container">#FFD3C6AA</color>
+    <color name="everforest_scrim">#99000000</color>
+    <color name="everforest_control_highlight">#1FA7C080</color>
+    <color name="everforest_success">#FFA7C080</color>
+    <color name="everforest_warning">#FFE69875</color>
+    <color name="everforest_yellow">#FFDBBC7F</color>
+
     <style name="ThemeOverlay.Npltz.PlainDark" parent="">
         <item name="colorPrimary">@color/plain_dark_primary</item>
         <item name="colorOnPrimary">@color/plain_dark_on_primary</item>
@@ -606,6 +643,45 @@
         <item name="colorAccent">@color/rose_pine_primary</item>
         <item name="colorControlActivated">@color/rose_pine_primary</item>
         <item name="android:colorAccent">@color/rose_pine_primary</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+    </style>
+    <style name="ThemeOverlay.Npltz.Everforest" parent="">
+        <item name="colorPrimary">@color/everforest_primary</item>
+        <item name="colorOnPrimary">@color/everforest_on_primary</item>
+        <item name="colorPrimaryContainer">@color/everforest_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/everforest_on_primary_container</item>
+        <item name="colorSecondary">@color/everforest_secondary</item>
+        <item name="colorOnSecondary">@color/everforest_on_secondary</item>
+        <item name="colorSecondaryContainer">@color/everforest_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/everforest_on_secondary_container</item>
+        <item name="colorTertiary">@color/everforest_tertiary</item>
+        <item name="colorOnTertiary">@color/everforest_on_tertiary</item>
+        <item name="colorTertiaryContainer">@color/everforest_tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/everforest_on_tertiary_container</item>
+        <item name="colorSurface">@color/everforest_surface</item>
+        <item name="colorOnSurface">@color/everforest_on_surface</item>
+        <item name="colorSurfaceVariant">@color/everforest_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/everforest_on_surface_variant</item>
+        <item name="colorSurfaceInverse">@color/everforest_surface_inverse</item>
+        <item name="colorOnSurfaceInverse">@color/everforest_on_surface_inverse</item>
+        <item name="colorSurfaceBright">@color/everforest_surface_bright</item>
+        <item name="colorSurfaceDim">@color/everforest_surface_dim</item>
+        <item name="colorSurfaceContainerLowest">@color/everforest_surface_container_lowest</item>
+        <item name="colorSurfaceContainerLow">@color/everforest_surface_container_low</item>
+        <item name="colorSurfaceContainer">@color/everforest_surface_container</item>
+        <item name="colorSurfaceContainerHigh">@color/everforest_surface_container_high</item>
+        <item name="colorSurfaceContainerHighest">@color/everforest_surface_container_highest</item>
+        <item name="colorOutline">@color/everforest_outline</item>
+        <item name="colorOutlineVariant">@color/everforest_outline_variant</item>
+        <item name="colorError">@color/everforest_error</item>
+        <item name="colorOnError">@color/everforest_on_error</item>
+        <item name="colorErrorContainer">@color/everforest_error_container</item>
+        <item name="colorOnErrorContainer">@color/everforest_on_error_container</item>
+        <item name="colorControlHighlight">@color/everforest_control_highlight</item>
+        <item name="colorAccent">@color/everforest_primary</item>
+        <item name="colorControlActivated">@color/everforest_primary</item>
+        <item name="android:colorAccent">@color/everforest_primary</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
     </style>

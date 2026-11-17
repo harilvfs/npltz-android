@@ -35,8 +35,9 @@ No ads, no tracking and no network permission.
   (Nepali) and January 1 (Gregorian).
 - Live Nepal Standard Time clock and a personal greeting on the home screen.
 - Date, month and greeting widgets that resize to fit the launcher.
-- Material 3 interface: Catppuccin Mocha by default, plus seven more themes,
-  three fonts, four text sizes and English/Nepali scripts.
+- Material 3 interface with nine themes: Catppuccin Mocha (default), Dracula,
+  Everforest, Gruvbox, Light, Nord, Plain dark, Rosé Pine and Warm reading.
+  Three fonts, four text sizes and English/Nepali scripts.
 - Report bugs from Settings with a GitHub issue or a pre-filled bug report mail.
 - Portrait and landscape layouts.
 
