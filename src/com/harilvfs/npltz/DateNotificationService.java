@@ -7,6 +7,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.service.notification.StatusBarNotification;
 
 import java.time.LocalDate;
 
@@ -39,9 +40,11 @@ public final class DateNotificationService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         // onResume calls start() on every return to the app; skip the rebuild
-        // while the ongoing notification already shows today's date.
+        // while the ongoing notification actually shows today's date. roms like
+        // miui can stop the service without onDestroy, so never trust the
+        // static flags alone, verify the notification is still posted.
         String today = LocalDate.now().toString();
-        if (running && today.equals(shownDate)) {
+        if (running && today.equals(shownDate) && persistentVisible()) {
             return START_STICKY;
         }
         Notification notification =
@@ -54,6 +57,20 @@ public final class DateNotificationService extends Service {
         running = true;
         shownDate = today;
         return START_STICKY;
+    }
+
+    private boolean persistentVisible() {
+        NotificationManager manager =
+            (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (manager == null) {
+            return false;
+        }
+        for (StatusBarNotification active : manager.getActiveNotifications()) {
+            if (active.getId() == NotificationScheduler.PERSISTENT_NOTIFY_ID) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

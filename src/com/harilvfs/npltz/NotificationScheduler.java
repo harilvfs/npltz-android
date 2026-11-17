@@ -148,11 +148,17 @@ public final class NotificationScheduler {
         }
         PendingIntent pending = refreshIntent(context);
         alarmManager.cancel(pending);
-        alarmManager.setAndAllowWhileIdle(
-            AlarmManager.RTC_WAKEUP,
-            nextMidnightMillis(),
-            pending
-        );
+        long trigger = nextMidnightMillis();
+        // exact so roms like miui cannot defer the midnight refresh for a
+        // backgrounded app; falls back when the user has not granted the
+        // schedule-exact special access on android 14+.
+        boolean exact = Build.VERSION.SDK_INT < Build.VERSION_CODES.S
+            || alarmManager.canScheduleExactAlarms();
+        if (exact) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, trigger, pending);
+        } else {
+            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, trigger, pending);
+        }
     }
 
     public static void scheduleSpecialDays(Context context) {
