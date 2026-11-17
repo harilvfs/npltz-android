@@ -1,4 +1,34 @@
 
+## [unreleased]
+
+
+### 🚀 Features
+
+
+- [917e60a](https://github.com/harilvfs/npltz-android/commit/917e60a206d7b7cc87d4366fe3f0e56e3e2549cb)  *(ui)* Add in-app changelog page and auto-update changelog on release (#8) by @harilvfs in [#8](https://github.com/harilvfs/npltz-android/pull/8)
+
+- [7c34e7f](https://github.com/harilvfs/npltz-android/commit/7c34e7fd7c2fb1155454e7eb25021ef6fb9b8bd0)  *(ui)* Add the everforest theme and sort the theme list by @harilvfs
+
+
+
+### 🐛 Bug Fixes
+
+
+- [2899f3a](https://github.com/harilvfs/npltz-android/commit/2899f3a13076676eebfab6ffe961c92ff953f5e5)  *(notifications)* Recover the persistent date notification after miui kills it by @harilvfs
+
+
+
+### 💼 Other
+
+
+- [105d25d](https://github.com/harilvfs/npltz-android/commit/105d25d0253657c67fbda93b6efba5ee9b8b21bf) Enable r8 minification, resource shrinking and locale filtering (#9) by @harilvfs in [#9](https://github.com/harilvfs/npltz-android/pull/9)
+
+- [8386bf0](https://github.com/harilvfs/npltz-android/commit/8386bf0a0867211e94b749029ba984b9d42b6478) Add a hand-written baseline profile for faster cold starts (#10) by @harilvfs in [#10](https://github.com/harilvfs/npltz-android/pull/10)
+
+- [b6de797](https://github.com/harilvfs/npltz-android/commit/b6de797c047d7d86bc65f2c4a46e6e06783662a1)  *(release)* Write the fastlane changelog per versioncode by @harilvfs
+
+
+
 ## [1.1.0](https://github.com/harilvfs/npltz-android/compare/v1.0.0...v1.1.0) - 2026-11-17
 
 

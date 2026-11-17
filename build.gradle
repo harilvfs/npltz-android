@@ -11,8 +11,8 @@ android {
         applicationId "com.harilvfs.npltz"
         minSdk 26
         targetSdk 35
-        versionCode 3
-        versionName "1.1.0"
+        versionCode 4
+        versionName "1.2.0"
 
         // strip every locale the material libraries bundle except english
         // and nepali, the app translates strings itself at runtime.
