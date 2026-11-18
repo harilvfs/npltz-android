@@ -48,7 +48,10 @@ jobs:
         with:
           version: "v2.13.1"
           config: cliff.toml
-          args: -o CHANGELOG.md
+          # --tag labels the unreleased commits with the version being released;
+          # without it they end up under an "unreleased" heading because the
+          # tag itself is only created later by the release step.
+          args: --tag ${{ github.event.inputs.tag_version }} -o CHANGELOG.md
         env:
           OUTPUT: CHANGELOG.md
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
