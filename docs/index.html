@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="catppuccin-mocha">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Npltz | Nepali (Bikram Sambat) calendar for Android</title>
+  <meta name="description" content="Npltz is a clean, offline Nepali (Bikram Sambat) calendar for Android with widgets, events and nine themes. 1.8 MB, no ads, no tracking, no internet permission.">
+  <meta name="theme-color" content="#1E1E2E">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="icon" href="icon.png" type="image/png" sizes="512x512">
+  <link rel="apple-touch-icon" href="icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Npltz | Nepali calendar for Android">
+  <meta property="og:description" content="A clean, offline Bikram Sambat calendar with widgets, reminders and nine themes. 1.8 MB, no ads, no tracking.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/harilvfs/npltz-android/main/docs/icon.png">
+  <link rel="preload" href="assets/fonts/inter-regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-medium.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=3">
+  <script>
+    // apply the saved theme and language before first paint
+    try {
+      var savedTheme = localStorage.getItem('npltz-theme');
+      if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+      var savedLang = localStorage.getItem('npltz-lang');
+      if (savedLang === 'ne') document.documentElement.lang = 'ne';
+    } catch (e) {}
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Npltz",
+    "operatingSystem": "Android 8.0 and up",
+    "applicationCategory": "UtilitiesApplication",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+    "softwareVersion": "1.2.0",
+    "fileSize": "1.8MB",
+    "author": { "@type": "Person", "name": "Hari Chalise" },
+    "downloadUrl": "https://github.com/harilvfs/npltz-android/releases/latest"
+  }
+  </script>
+</head>
+<body>
+<a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-github" viewBox="0 0 24 24">
+    <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/>
+  </symbol>
+  <symbol id="i-download" viewBox="0 0 24 24">
+    <path d="M12 4v11m0 0 4-4m-4 4-4-4M5 19h14"/>
+  </symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24">
+    <rect x="3.5" y="5" width="17" height="15.5" rx="3"/>
+    <path d="M3.5 9.5h17M8 3v3.5M16 3v3.5"/>
+  </symbol>
+  <symbol id="i-day" viewBox="0 0 24 24">
+    <rect x="3.5" y="5" width="17" height="15.5" rx="3"/>
+    <path d="M3.5 9.5h17"/>
+    <rect x="7" y="12.5" width="4.5" height="4.5" rx="1.2" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="i-note" viewBox="0 0 24 24">
+    <path d="M5 4.5h9.5L19 9v10.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-14a1 1 0 0 1 1-1Z"/>
+    <path d="M14 4.5V9h4.5M8 13h8M8 16.5h5"/>
+  </symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24">
+    <path d="M6 9a6 6 0 1 1 12 0c0 4 1.5 5.5 1.5 5.5H4.5S6 13 6 9Z"/>
+    <path d="M10 18a2 2 0 0 0 4 0"/>
+  </symbol>
+  <symbol id="i-widgets" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="7" height="7" rx="2"/>
+    <rect x="13.5" y="3.5" width="7" height="7" rx="2"/>
+    <rect x="3.5" y="13.5" width="7" height="7" rx="2"/>
+    <rect x="13.5" y="13.5" width="7" height="7" rx="2"/>
+  </symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24">
+    <path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 1.6-2.2-.4-1.2.4-2.3 1.7-2.3H18a3 3 0 0 0 3-3c0-5.5-4-10.5-9-10.5Z"/>
+    <circle cx="8" cy="10" r="1.2" fill="currentColor" stroke="none"/>
+    <circle cx="12" cy="7.5" r="1.2" fill="currentColor" stroke="none"/>
+    <circle cx="16" cy="10" r="1.2" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24">
+    <rect x="4.5" y="10" width="15" height="10.5" rx="3"/>
+    <path d="M8 10V7.5a4 4 0 0 1 8 0V10"/>
+  </symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24">
+    <path d="M5 12h14m0 0-5-5m5 5-5 5"/>
+  </symbol>
+  <symbol id="i-external" viewBox="0 0 24 24">
+    <path d="M14 4h6v6M20 4l-8.5 8.5"/>
+    <path d="M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/>
+  </symbol>
+  <symbol id="i-up" viewBox="0 0 24 24">
+    <path d="M12 19V6m0 0-6 6m6-6 6 6"/>
+  </symbol>
+</svg>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="Npltz home">
+      <img src="icon.svg" alt="" width="34" height="34">
+      <span>Npltz</span>
+    </a>
+    <nav class="nav-links" aria-label="Main" data-i18n-aria="aria_nav">
+      <a href="#features" data-i18n="nav_features">Features</a>
+      <a href="#screenshots" data-i18n="nav_screenshots">Screenshots</a>
+      <a href="#themes" data-i18n="nav_themes">Themes</a>
+      <a href="https://github.com/harilvfs/npltz-android/blob/main/CHANGELOG.md">
+        <span data-i18n="nav_changelog">Changelog</span>
+        <svg class="ext" aria-hidden="true"><use href="#i-external"/></svg>
+      </a>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria="aria_lang">
+      <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
+      <button type="button" data-lang="ne" aria-pressed="false" lang="ne">नेपाली</button>
+    </div>
+    <a class="btn btn-outline btn-small header-cta" href="https://github.com/harilvfs/npltz-android"
+       aria-label="Npltz on GitHub" data-i18n-aria="aria_github">
+      <svg class="icon fill" aria-hidden="true"><use href="#i-github"/></svg>
+      <span class="header-cta-text">GitHub</span>
+      <svg class="ext header-cta-ext" aria-hidden="true"><use href="#i-external"/></svg>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero wrap" id="top">
+    <div class="hero-copy">
+      <p class="eyebrow" data-i18n="hero_eyebrow">Bikram Sambat calendar for Android</p>
+      <h1 data-i18n="hero_h1">The Nepali calendar, without the noise.</h1>
+      <p class="lede" data-i18n="hero_lede">
+        Npltz shows today's BS date, the matching AD date, events and reminders
+        in a small, native Android app. Nothing to sign into, nothing to load,
+        nothing tracking you.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://github.com/harilvfs/npltz-android/releases/latest/download/npltz-android.apk">
+          <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
+          <span data-i18n="cta_download">Download APK</span>
+        </a>
+        <a class="btn btn-outline" href="https://github.com/harilvfs/npltz-android">
+          <svg class="icon fill" aria-hidden="true"><use href="#i-github"/></svg>
+          <span data-i18n="cta_source">View source</span>
+          <svg class="ext" aria-hidden="true"><use href="#i-external"/></svg>
+        </a>
+      </div>
+      <p class="fineprint" data-i18n="fineprint">Android 8.0 and up. Free and open source, GPL-3.0. Built with Material 3.</p>
+    </div>
+    <div class="hero-art">
+      <img class="phone hero-phone" src="screens/home.png" width="756" height="1636"
+           alt="Npltz month view showing Kartik 2083 with BS and AD dates under each day">
+    </div>
+  </section>
+
+  <section class="wrap" aria-label="At a glance">
+    <ul class="stats">
+      <li><strong data-i18n="stat_apk_n">1.8 MB</strong><span data-i18n="stat_apk_l">signed APK</span></li>
+      <li><strong data-i18n="stat_off_n">100% offline</strong><span data-i18n="stat_off_l">no internet permission</span></li>
+      <li><strong data-i18n="stat_years_n">1975 to 2090</strong><span data-i18n="stat_years_l">BS years built in</span></li>
+      <li><strong data-i18n="stat_themes_n">9 themes</strong><span data-i18n="stat_themes_l">Material You palettes</span></li>
+    </ul>
+  </section>
+
+  <section class="section wrap" id="features">
+    <p class="eyebrow" data-i18n="feat_eyebrow">Features</p>
+    <h2 data-i18n="feat_h2">A calendar, and not much else.</h2>
+    <p class="section-lede" data-i18n="feat_lede">Everything you need to keep track of Bikram Sambat dates, and nothing you don't.</p>
+
+    <div class="cards">
+      <article class="card">
+        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></span>
+        <h3 data-i18n="card1_t">Month and year views</h3>
+        <p data-i18n="card1_d">Scan a full BS month or the whole year. Every day carries its matching AD date underneath.</p>
+      </article>
+      <article class="card">
+        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-day"/></svg></span>
+        <h3 data-i18n="card2_t">Day details</h3>
+        <p data-i18n="card2_d">Open any date for the week number, days remaining and year progress at a glance.</p>
+      </article>
+      <article class="card">
+        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg></span>
+        <h3 data-i18n="card3_t">Events and notes</h3>
+        <p data-i18n="card3_d">Attach events and notes to a date, with an optional reminder time.</p>
+      </article>
+      <article class="card">
+        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg></span>
+        <h3 data-i18n="card4_t">Notifications</h3>
+        <p data-i18n="card4_d">A daily date notification, plus an optional permanent one that keeps today's date in your shade.</p>
+      </article>
+      <article class="card">
+        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-widgets"/></svg></span>
+        <h3 data-i18n="card5_t">Home screen widgets</h3>
+        <p data-i18n="card5_d">Date, month and greeting widgets, all drawn with your current theme.</p>
+      </article>
+      <article class="card">
+        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-palette"/></svg></span>
+        <h3 data-i18n="card6_t">Themes and type</h3>
+        <p data-i18n="card6_d">Nine color themes, three fonts, four text sizes, English and Nepali scripts.</p>
+      </article>
+    </div>
+
+    <div class="privacy">
+      <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg></span>
+      <div>
+        <h3 data-i18n="privacy_t">Offline by design</h3>
+        <p data-i18n="privacy_p">
+          The BS calendar data is compiled into the app, covering 1975 to 2090 BS.
+          There is no API, no account, no ads, no analytics and no internet permission
+          in the manifest. Nothing leaves your phone.
+        </p>
+        <ul class="chips">
+          <li data-i18n="chip_ads">No ads</li>
+          <li data-i18n="chip_trackers">No trackers</li>
+          <li data-i18n="chip_signin">No sign-in</li>
+          <li>GPL-3.0</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="screenshots">
+    <p class="eyebrow" data-i18n="shots_eyebrow">Screenshots</p>
+    <h2 data-i18n="shots_h2">Every screen, in your theme.</h2>
+    <p class="section-lede" data-i18n="shots_lede">Switching the theme below re-skins the whole app, from the month grid to the settings page.</p>
+
+    <div class="rail">
+      <figure class="shot">
+        <img class="phone" src="screens/home.png" width="756" height="1636" loading="lazy"
+             alt="Month view with BS and AD dates">
+        <figcaption data-i18n="cap_month">Month view</figcaption>
+      </figure>
+      <figure class="shot">
+        <img class="phone" src="screens/year.png" width="756" height="1636" loading="lazy"
+             alt="Year view of 2083 BS">
+        <figcaption data-i18n="cap_year">Year view</figcaption>
+      </figure>
+      <figure class="shot">
+        <img class="phone" src="screens/day.png" width="756" height="1636" loading="lazy"
+             alt="Day details with week number and year progress">
+        <figcaption data-i18n="cap_day">Day details</figcaption>
+      </figure>
+      <figure class="shot">
+        <img class="phone" src="screens/events.png" width="756" height="1636" loading="lazy"
+             alt="Events and notes for a date">
+        <figcaption data-i18n="cap_events">Events and notes</figcaption>
+      </figure>
+      <figure class="shot">
+        <img class="phone" src="widgets.png" width="756" height="1636" loading="lazy"
+             alt="Home screen widgets for date, month and greeting">
+        <figcaption data-i18n="cap_widgets">Widgets</figcaption>
+      </figure>
+      <figure class="shot">
+        <img class="phone" src="screens/notifications.png" width="756" height="1636" loading="lazy"
+             alt="Persistent date notification">
+        <figcaption data-i18n="cap_notifications">Notifications</figcaption>
+      </figure>
+    </div>
+    <p class="rail-note" data-i18n="rail_note">Screenshots use the default Catppuccin Mocha theme.</p>
+  </section>
+
+  <section class="section wrap" id="themes">
+    <div class="themes-grid">
+      <div>
+        <p class="eyebrow" data-i18n="themes_eyebrow">Themes</p>
+        <h2 data-i18n="themes_h2">Nine themes. Pick one.</h2>
+        <p class="section-lede" data-i18n="themes_lede">
+          These are the palettes the app ships with. Click a swatch and this page
+          follows along. Your pick is remembered in this browser.
+        </p>
+        <div class="swatches" role="group" aria-label="Color themes" data-i18n-aria="aria_themes">
+          <button class="swatch" type="button" data-set-theme="catppuccin-mocha" aria-pressed="true">
+            <span class="dots"><i style="background:#89B4FA"></i><i style="background:#ADD8BE"></i><i style="background:#1E1E2E"></i></span>
+            <span class="swatch-name">Catppuccin Mocha</span>
+          </button>
+          <button class="swatch" type="button" data-set-theme="dracula" aria-pressed="false">
+            <span class="dots"><i style="background:#BD93F9"></i><i style="background:#8BE9FD"></i><i style="background:#282A36"></i></span>
+            <span class="swatch-name">Dracula</span>
+          </button>
+          <button class="swatch" type="button" data-set-theme="everforest" aria-pressed="false">
+            <span class="dots"><i style="background:#A7C080"></i><i style="background:#7FBBB3"></i><i style="background:#2D353B"></i></span>
+            <span class="swatch-name">Everforest</span>
+          </button>
+          <button class="swatch" type="button" data-set-theme="gruvbox" aria-pressed="false">
+            <span class="dots"><i style="background:#B8BB26"></i><i style="background:#83A598"></i><i style="background:#282828"></i></span>
+            <span class="swatch-name">Gruvbox</span>
+          </button>
+          <button class="swatch" type="button" data-set-theme="light" aria-pressed="false">
+            <span class="dots"><i style="background:#3F5B9E"></i><i style="background:#5E6E7E"></i><i style="background:#F6F6F4"></i></span>
+            <span class="swatch-name">Light</span>
+          </button>
+          <button class="swatch" type="button" data-set-theme="nord" aria-pressed="false">
+            <span class="dots"><i style="background:#88C0D0"></i><i style="background:#A3BE8C"></i><i style="background:#2E3440"></i></span>
+            <span class="swatch-name">Nord</span>
+          </button>
+          <button class="swatch" type="button" data-set-theme="plain-dark" aria-pressed="false">
+            <span class="dots"><i style="background:#5A5A5A"></i><i style="background:#7A7A7A"></i><i style="background:#000000"></i></span>
+            <span class="swatch-name">Plain dark</span>
+          </button>
+          <button class="swatch" type="button" data-set-theme="rose-pine" aria-pressed="false">
+            <span class="dots"><i style="background:#C4A7E7"></i><i style="background:#9CCFD8"></i><i style="background:#191724"></i></span>
+            <span class="swatch-name">Rosé Pine</span>
+          </button>
+          <button class="swatch" type="button" data-set-theme="warm-reading" aria-pressed="false">
+            <span class="dots"><i style="background:#9C5A32"></i><i style="background:#83705A"></i><i style="background:#F3E9D6"></i></span>
+            <span class="swatch-name">Warm reading</span>
+          </button>
+        </div>
+      </div>
+      <div class="themes-art">
+        <img class="phone" src="screens/settings.png" width="756" height="1636" loading="lazy"
+             alt="Settings page with theme, font, text size and language options">
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="download">
+    <div class="download-band">
+      <div class="download-copy">
+        <img src="icon.svg" alt="" width="56" height="56" class="band-icon">
+        <div>
+          <h2 data-i18n="dl_h2">Get Npltz</h2>
+          <p data-i18n="dl_p">
+            A 1.8 MB signed APK for Android 8.0 and up. The F-Droid submission is
+            in review. GitHub Releases is available now, with SHA-256 checksums.
+          </p>
+        </div>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://github.com/harilvfs/npltz-android/releases/latest/download/npltz-android.apk">
+          <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
+          <span data-i18n="cta_download">Download APK</span>
+        </a>
+        <a class="btn btn-outline" href="https://github.com/harilvfs/npltz-android/releases/latest">
+          <span data-i18n="cta_releases">All releases</span>
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="foot-logo">
+          <img src="icon.svg" alt="" width="40" height="40">
+          <span>Npltz</span>
+        </div>
+        <p>
+          <span data-i18n="foot_brand1">Nepali dates, quietly.</span><br>
+          <span data-i18n="foot_brand2">Made in Nepal.</span>
+        </p>
+      </div>
+
+      <div class="foot-col">
+        <h4 data-i18n="foot_download">Download</h4>
+        <a href="https://github.com/harilvfs/npltz-android/releases/latest">
+          <span data-i18n="foot_latest">Latest release</span>
+          <svg class="ext" aria-hidden="true"><use href="#i-external"/></svg>
+        </a>
+        <a href="https://github.com/harilvfs/npltz-android/releases/latest/download/npltz-android.apk">
+          <span data-i18n="foot_apk">Direct APK</span>
+          <svg class="ext" aria-hidden="true"><use href="#i-external"/></svg>
+        </a>
+        <a href="https://github.com/harilvfs/npltz-android/releases/latest/download/npltz-android.apk.sha256">
+          <span data-i18n="foot_sum">Checksum</span>
+          <svg class="ext" aria-hidden="true"><use href="#i-external"/></svg>
+        </a>
+        <span class="foot-soon"><span data-i18n="foot_soon">F-Droid</span> <em data-i18n="foot_in_review">in review</em></span>
+      </div>
+
+      <div class="foot-col">
+        <h4 data-i18n="foot_learn">Learn more</h4>
+        <a href="#features" data-i18n="nav_features">Features</a>
+        <a href="#screenshots" data-i18n="nav_screenshots">Screenshots</a>
+        <a href="#themes" data-i18n="nav_themes">Themes</a>
+        <a href="https://github.com/harilvfs/npltz/blob/main/calendar_data.json">
+          <span data-i18n="foot_calendar">Calendar data</span>
+          <svg class="ext" aria-hidden="true"><use href="#i-external"/></svg>
+        </a>
+      </div>
+
+      <div class="foot-col">
+        <h4 data-i18n="foot_project">Project</h4>
+        <a href="https://github.com/harilvfs/npltz-android">
+          <span data-i18n="foot_source">Source code</span>
+          <svg class="ext" aria-hidden="true"><use href="#i-external"/></svg>
+        </a>
+        <a href="https://github.com/harilvfs/npltz-android/blob/main/CHANGELOG.md">
+          <span data-i18n="foot_changelog">Changelog</span>
+          <svg class="ext" aria-hidden="true"><use href="#i-external"/></svg>
+        </a>
+        <a href="https://github.com/harilvfs/npltz-android/blob/main/LICENSE">
+          <span data-i18n="foot_license">License</span>
+          <svg class="ext" aria-hidden="true"><use href="#i-external"/></svg>
+        </a>
+        <a href="https://github.com/harilvfs/npltz-android/issues">
+          <span data-i18n="foot_bugs">Report a bug</span>
+          <svg class="ext" aria-hidden="true"><use href="#i-external"/></svg>
+        </a>
+      </div>
+
+      <div class="foot-col">
+        <h4 data-i18n="foot_author">Author</h4>
+        <a href="https://github.com/harilvfs">
+          <span>GitHub</span>
+          <svg class="ext" aria-hidden="true"><use href="#i-external"/></svg>
+        </a>
+        <a href="mailto:harilvfs@chalisehari.com.np">
+          <span data-i18n="foot_email">Email</span>
+          <svg class="ext" aria-hidden="true"><use href="#i-external"/></svg>
+        </a>
+        <a href="https://github.com/harilvfs/npltz">
+          <span data-i18n="foot_terminal">npltz for the terminal</span>
+          <svg class="ext" aria-hidden="true"><use href="#i-external"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <p>© <span id="year">2026</span> <span data-i18n="foot_copy">Hari Chalise. GPL-3.0.</span></p>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="to-top" type="button" aria-label="Back to top" title="Back to top" data-i18n-aria="aria_back_top">
+  <svg class="icon" aria-hidden="true"><use href="#i-up"/></svg>
+</button>
+
+<script src="script.js?v=3"></script>
+</body>
+</html>
