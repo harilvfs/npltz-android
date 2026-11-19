@@ -126,6 +126,26 @@
   var metaDesc = document.querySelector('meta[name="description"]');
   var baseDesc = metaDesc ? metaDesc.getAttribute("content") : "";
   var langButtons = document.querySelectorAll("[data-lang]");
+  var langSwitch = document.querySelector(".lang-switch");
+  var langThumb = langSwitch ? langSwitch.querySelector(".lang-thumb") : null;
+
+  function moveLangThumb(lang) {
+    if (!langThumb) return;
+    var active = null;
+    langButtons.forEach(function (button) {
+      if (button.dataset.lang === lang) active = button;
+    });
+    if (!active) return;
+    var box = langSwitch.getBoundingClientRect();
+    var target = active.getBoundingClientRect();
+    var border = parseFloat(window.getComputedStyle(langSwitch).borderLeftWidth) || 0;
+    langThumb.style.width = target.width + "px";
+    langThumb.style.transform =
+      "translateX(" + Math.round(target.left - box.left - border - 2) + "px)";
+    window.requestAnimationFrame(function () {
+      langSwitch.classList.add("is-ready");
+    });
+  }
 
   function applyLang(lang, remember) {
     var ne = lang === "ne";
@@ -156,6 +176,8 @@
         localStorage.setItem("npltz-lang", lang);
       } catch (e) {}
     }
+
+    moveLangThumb(lang);
   }
 
   langButtons.forEach(function (button) {
@@ -169,6 +191,12 @@
     savedLang = localStorage.getItem("npltz-lang") === "ne" ? "ne" : "en";
   } catch (e) {}
   applyLang(savedLang, false);
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () {
+      moveLangThumb(root.lang);
+    });
+  }
 
   /* ------------------------------------------------ theme */
 
@@ -249,12 +277,14 @@
     function () {
       measure();
       onScroll();
+      moveLangThumb(root.lang);
     },
     { passive: true }
   );
   window.addEventListener("load", function () {
     measure();
     onScroll();
+    moveLangThumb(root.lang);
   });
   if ("ResizeObserver" in window) {
     new ResizeObserver(measure).observe(document.body);

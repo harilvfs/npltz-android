@@ -516,6 +516,7 @@ img {
 }
 
 .lang-switch {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 2px;
@@ -524,7 +525,25 @@ img {
   border-radius: 999px;
 }
 
+.lang-thumb {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  width: 0;
+  border-radius: 999px;
+  background: var(--surface-high);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.lang-switch.is-ready .lang-thumb {
+  transition: transform 0.26s cubic-bezier(0.2, 0, 0, 1), width 0.26s cubic-bezier(0.2, 0, 0, 1);
+}
+
 .lang-switch button {
+  position: relative;
+  z-index: 1;
   padding: 5px 9px;
   border: 0;
   border-radius: 999px;
@@ -535,15 +554,19 @@ img {
   font-weight: 600;
   line-height: 1.25;
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition: color 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 
-.lang-switch button:hover {
-  color: var(--on-surface);
+@media (hover: hover) {
+  .lang-switch button:hover {
+    color: var(--on-surface);
+  }
 }
 
 .lang-switch button[aria-pressed="true"] {
-  background: var(--surface-high);
   color: var(--on-surface);
 }
 
