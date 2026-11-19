@@ -980,8 +980,9 @@ img {
   right: 24px;
   bottom: 24px;
   z-index: 30;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 56px;
   height: 56px;
   padding: 0;
