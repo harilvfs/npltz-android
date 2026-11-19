@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="catppuccin-mocha">
+<html lang="en" class="no-flex-gap" data-theme="catppuccin-mocha">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,8 +15,26 @@
   <meta property="og:image" content="https://raw.githubusercontent.com/harilvfs/npltz-android/main/docs/icon.png">
   <link rel="preload" href="assets/fonts/inter-regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="assets/fonts/inter-medium.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=6">
+  <link rel="stylesheet" href="styles.css?v=7">
   <script>
+    // Older browsers do not support gap in flex layouts.
+    try {
+      var flexProbe = document.createElement('div');
+      flexProbe.style.cssText = 'display:flex;flex-direction:column;position:absolute;visibility:hidden;top:-1000px';
+      flexProbe.style.rowGap = '1px';
+      var flexChildA = document.createElement('div');
+      var flexChildB = document.createElement('div');
+      flexChildA.style.height = '1px';
+      flexChildB.style.height = '1px';
+      flexProbe.appendChild(flexChildA);
+      flexProbe.appendChild(flexChildB);
+      document.documentElement.appendChild(flexProbe);
+      if (flexProbe.scrollHeight === 3) {
+        document.documentElement.classList.remove('no-flex-gap');
+      }
+      document.documentElement.removeChild(flexProbe);
+    } catch (e) {}
+
     // apply the saved theme and language before first paint
     try {
       var savedTheme = localStorage.getItem('npltz-theme');

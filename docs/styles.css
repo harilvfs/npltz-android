@@ -218,8 +218,7 @@
 [data-theme="warm-reading"] {
   color-scheme: light;
   --phone-shadow: rgba(40, 30, 20, 0.18);
-  --foot-link: var(--on-surface);
-  --foot-link: color-mix(in srgb, var(--on-surface) 68%, transparent);
+  --foot-link: var(--on-surface-variant);
 }
 
 *,
@@ -409,7 +408,10 @@ img {
   .site-header::before {
     content: "";
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     z-index: -1;
     background: var(--surface);
     background: color-mix(in srgb, var(--surface) 64%, transparent);
@@ -1153,5 +1155,118 @@ img {
   *::after {
     transition: none !important;
     animation: none !important;
+  }
+}
+
+/* Flex gap arrived later than grid gap in Chromium. Keep older browsers spaced. */
+.no-flex-gap .btn > * + * {
+  margin-left: 10px;
+}
+
+.no-flex-gap .cta-row {
+  margin-right: -12px;
+  margin-bottom: -12px;
+}
+
+.no-flex-gap .cta-row > * {
+  margin-right: 12px;
+  margin-bottom: 12px;
+}
+
+.no-flex-gap .header-inner > .brand {
+  margin-right: 28px;
+}
+
+.no-flex-gap .header-inner > .nav-links,
+.no-flex-gap .header-inner > .lang-switch {
+  margin-right: 28px;
+}
+
+.no-flex-gap .brand > * + * {
+  margin-left: 11px;
+}
+
+.no-flex-gap .nav-links > * + * {
+  margin-left: 26px;
+}
+
+.no-flex-gap .nav-links a > * + *,
+.no-flex-gap .foot-col a > .ext {
+  margin-left: 5px;
+}
+
+.no-flex-gap .lang-switch button[data-lang="ne"] {
+  margin-left: 2px;
+}
+
+.no-flex-gap .star-count > * + * {
+  margin-left: 4px;
+}
+
+.no-flex-gap .privacy > * + * {
+  margin-left: 22px;
+}
+
+.no-flex-gap .chips {
+  margin-bottom: -8px;
+}
+
+.no-flex-gap .chips li {
+  margin: 0 8px 8px 0;
+}
+
+.no-flex-gap .rail > * + * {
+  margin-left: 24px;
+}
+
+.no-flex-gap .swatch > * + * {
+  margin-top: 10px;
+}
+
+.no-flex-gap .dots > * + * {
+  margin-left: 6px;
+}
+
+.no-flex-gap .download-copy {
+  margin-right: 28px;
+}
+
+.no-flex-gap .download-copy > * + * {
+  margin-left: 20px;
+}
+
+.no-flex-gap .foot-logo > * + * {
+  margin-left: 12px;
+}
+
+.no-flex-gap .foot-bottom > * {
+  margin: 0 24px 10px 0;
+}
+
+@media (max-width: 540px) {
+  .no-flex-gap .header-inner > .brand,
+  .no-flex-gap .header-inner > .lang-switch {
+    margin-right: 10px;
+  }
+
+  .no-flex-gap .cta-row {
+    margin-right: 0;
+  }
+
+  .no-flex-gap .cta-row .btn {
+    width: calc(100% - 12px);
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .no-flex-gap .privacy > * + * {
+    margin-top: 16px;
+    margin-left: 0;
+  }
+
+  .no-flex-gap .download-copy > * + * {
+    margin-top: 14px;
+    margin-left: 0;
   }
 }
