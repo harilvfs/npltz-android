@@ -269,6 +269,26 @@
     });
   }
 
+  var starBox = document.querySelector("[data-stars]");
+  var starValue = document.querySelector("[data-stars-value]");
+  if (starBox && starValue && window.fetch) {
+    fetch("https://api.github.com/repos/harilvfs/npltz-android", {
+      headers: { Accept: "application/vnd.github+json" },
+      cache: "no-store",
+    })
+      .then(function (res) {
+        return res.ok ? res.json() : null;
+      })
+      .then(function (data) {
+        var count = data && data.stargazers_count;
+        if (!count) return;
+        starValue.textContent =
+          count >= 1000 ? (count / 1000).toFixed(1).replace(".0", "") + "k" : String(count);
+        starBox.hidden = false;
+      })
+      .catch(function () {});
+  }
+
   var rail = document.querySelector(".rail");
   if (rail) {
     var drag = null;

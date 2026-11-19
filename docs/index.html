@@ -15,7 +15,7 @@
   <meta property="og:image" content="https://raw.githubusercontent.com/harilvfs/npltz-android/main/docs/icon.png">
   <link rel="preload" href="assets/fonts/inter-regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="assets/fonts/inter-medium.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
   <script>
     // apply the saved theme and language before first paint
     try {
@@ -47,6 +47,9 @@
 <svg class="sprite" aria-hidden="true" focusable="false">
   <symbol id="i-github" viewBox="0 0 24 24">
     <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/>
+  </symbol>
+  <symbol id="i-star" viewBox="0 0 24 24">
+    <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
   </symbol>
   <symbol id="i-download" viewBox="0 0 24 24">
     <path d="M12 4v11m0 0 4-4m-4 4-4-4M5 19h14"/>
@@ -119,6 +122,10 @@
        aria-label="Npltz on GitHub" data-i18n-aria="aria_github">
       <svg class="icon fill" aria-hidden="true"><use href="#i-github"/></svg>
       <span class="header-cta-text">GitHub</span>
+      <span class="star-count" data-stars hidden aria-hidden="true">
+        <svg class="icon fill"><use href="#i-star"/></svg>
+        <span data-stars-value></span>
+      </span>
       <svg class="ext header-cta-ext" aria-hidden="true"><use href="#i-external"/></svg>
     </a>
   </div>
@@ -431,6 +438,6 @@
   <svg class="icon" aria-hidden="true"><use href="#i-up"/></svg>
 </button>
 
-<script src="script.js?v=3"></script>
+<script src="script.js?v=4"></script>
 </body>
 </html>

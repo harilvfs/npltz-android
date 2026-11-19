@@ -551,6 +551,24 @@ img {
   margin-left: 4px;
 }
 
+.star-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--on-surface-variant);
+}
+
+.star-count[hidden] {
+  display: none;
+}
+
+.star-count .icon {
+  width: 15px;
+  height: 15px;
+}
+
 .hero {
   display: grid;
   grid-template-columns: 1.08fr 0.92fr;
