@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.harilvfs.npltz"
-        minSdk 26
+        minSdk 21
         targetSdk 35
         versionCode 4
         versionName "1.2.0"
@@ -22,6 +22,7 @@ android {
     }
 
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
@@ -58,7 +59,8 @@ android {
 }
 
 dependencies {
-    implementation "com.google.android.material:material:1.14.0"
+    implementation "com.google.android.material:material:1.13.0"
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.5"
     implementation "androidx.profileinstaller:profileinstaller:1.4.1"
 }
 

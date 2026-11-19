@@ -19,6 +19,8 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.service.notification.StatusBarNotification;
 import android.widget.RemoteViews;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -59,7 +61,11 @@ public final class NotificationScheduler {
     }
 
     public static void createChannel(Context context) {
-        NotificationManager manager = context.getSystemService(NotificationManager.class);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            return;
+        }
+        NotificationManager manager =
+            (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (manager == null) {
             return;
         }
@@ -133,11 +139,8 @@ public final class NotificationScheduler {
         }
         PendingIntent pending = alarmIntent(context);
         alarmManager.cancel(pending);
-        alarmManager.setAndAllowWhileIdle(
-            AlarmManager.RTC_WAKEUP,
-            nextTriggerMillis(hour, minute),
-            pending
-        );
+        setAllowWhileIdle(alarmManager, AlarmManager.RTC_WAKEUP,
+            nextTriggerMillis(hour, minute), pending);
     }
 
     public static void schedulePersistentRefresh(Context context) {
@@ -155,9 +158,13 @@ public final class NotificationScheduler {
         boolean exact = Build.VERSION.SDK_INT < Build.VERSION_CODES.S
             || alarmManager.canScheduleExactAlarms();
         if (exact) {
-            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, trigger, pending);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, trigger, pending);
+            } else {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, trigger, pending);
+            }
         } else {
-            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, trigger, pending);
+            setAllowWhileIdle(alarmManager, AlarmManager.RTC_WAKEUP, trigger, pending);
         }
     }
 
@@ -195,11 +202,8 @@ public final class NotificationScheduler {
         }
         PendingIntent pending = specialIntent(context, ACTION_AD_NEW_YEAR, AD_NEW_YEAR_REQUEST);
         alarmManager.cancel(pending);
-        alarmManager.setAndAllowWhileIdle(
-            AlarmManager.RTC_WAKEUP,
-            trigger.toInstant().toEpochMilli(),
-            pending
-        );
+        setAllowWhileIdle(alarmManager, AlarmManager.RTC_WAKEUP,
+            trigger.toInstant().toEpochMilli(), pending);
     }
 
     private static void scheduleSpecialDay(Context context, int month, int day,
@@ -233,11 +237,17 @@ public final class NotificationScheduler {
         }
         PendingIntent pending = specialIntent(context, action, requestCode);
         alarmManager.cancel(pending);
-        alarmManager.setAndAllowWhileIdle(
-            AlarmManager.RTC_WAKEUP,
-            trigger.toInstant().toEpochMilli(),
-            pending
-        );
+        setAllowWhileIdle(alarmManager, AlarmManager.RTC_WAKEUP,
+            trigger.toInstant().toEpochMilli(), pending);
+    }
+
+    private static void setAllowWhileIdle(AlarmManager alarmManager, int type,
+        long triggerAtMillis, PendingIntent pending) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setAndAllowWhileIdle(type, triggerAtMillis, pending);
+        } else {
+            alarmManager.setExact(type, triggerAtMillis, pending);
+        }
     }
 
     private static PendingIntent specialIntent(Context context, String action, int requestCode) {
@@ -329,10 +339,12 @@ public final class NotificationScheduler {
         }
         NotificationManager manager =
             (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if (manager == null || !manager.areNotificationsEnabled()) {
+        if (manager == null
+            || !NotificationManagerCompat.from(context).areNotificationsEnabled()) {
             return false;
         }
-        NotificationChannel channel = manager.getNotificationChannel(channelId);
+        NotificationChannel channel = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
+            ? manager.getNotificationChannel(channelId) : null;
         if (channel != null && channel.getImportance() == NotificationManager.IMPORTANCE_NONE) {
             return false;
         }
@@ -452,7 +464,7 @@ public final class NotificationScheduler {
             big.setImageViewBitmap(R.id.notif_tile, tile);
         }
 
-        Notification.Builder builder = new Notification.Builder(
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(
             context,
             ongoing ? CHANNEL_ID_PERSISTENT : CHANNEL_ID
         )
@@ -469,10 +481,10 @@ public final class NotificationScheduler {
             builder.setOngoing(true)
                 .setAutoCancel(false)
                 .setShowWhen(false)
-                .setCategory(Notification.CATEGORY_STATUS);
+                .setCategory(NotificationCompat.CATEGORY_STATUS);
         } else {
             builder.setAutoCancel(true)
-                .setCategory(Notification.CATEGORY_REMINDER);
+                .setCategory(NotificationCompat.CATEGORY_REMINDER);
         }
 
         return builder.build();
@@ -553,16 +565,16 @@ public final class NotificationScheduler {
                     + ". Happy birthday to Hari Chalise, the developer of Npltz.";
         }
 
-        Notification notification = new Notification.Builder(context, CHANNEL_ID_SPECIAL)
+        Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID_SPECIAL)
             .setSmallIcon(iconRes)
             .setContentTitle(title)
             .setContentText(text)
-            .setStyle(new Notification.BigTextStyle().bigText(text))
+            .setStyle(new NotificationCompat.BigTextStyle().bigText(text))
             .setContentIntent(openIntent(context))
             .setAutoCancel(true)
             .setOnlyAlertOnce(true)
             .setColor(accent)
-            .setCategory(Notification.CATEGORY_REMINDER)
+            .setCategory(NotificationCompat.CATEGORY_REMINDER)
             .build();
 
         NotificationManager manager =
@@ -591,11 +603,13 @@ public final class NotificationScheduler {
         if (manager == null || !prefs.isNotifyEnabled() || !canNotify(context, CHANNEL_ID)) {
             return;
         }
-        boolean dailyVisible = false;
-        for (StatusBarNotification notification : manager.getActiveNotifications()) {
-            if (notification.getId() == NOTIFY_ID) {
-                dailyVisible = true;
-                break;
+        boolean dailyVisible = Build.VERSION.SDK_INT < Build.VERSION_CODES.M;
+        if (!dailyVisible) {
+            for (StatusBarNotification notification : manager.getActiveNotifications()) {
+                if (notification.getId() == NOTIFY_ID) {
+                    dailyVisible = true;
+                    break;
+                }
             }
         }
         if (dailyVisible) {

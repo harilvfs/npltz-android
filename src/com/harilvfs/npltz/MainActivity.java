@@ -325,7 +325,8 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
         });
         android.view.MenuItem settingsItem = toolbar.getMenu().findItem(R.id.action_settings);
         if (settingsItem != null) {
-            settingsItem.setIconTintList(ColorStateList.valueOf(Ui.color(
+            androidx.core.view.MenuItemCompat.setIconTintList(settingsItem,
+                ColorStateList.valueOf(Ui.color(
                 toolbar,
                 com.google.android.material.R.attr.colorOnSurface
             )));

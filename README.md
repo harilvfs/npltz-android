@@ -64,7 +64,9 @@ manager.
 
 ## Notes
 
-- Minimum Android 8.0 (API 26); targets and compiles against API 35.
+- Minimum Android 5.0 (API 21); targets and compiles against API 35. The app
+  uses Material Components 1.13 (which supports API 21+) and Java API
+  desugaring for `java.time` on older Android versions.
 - Fully offline: no network permission, ads, analytics or tracking.
 - Events, notes and settings are stored on the device. Clearing app data removes
   them.

@@ -176,7 +176,11 @@ final class GreetingWidgetSupport {
         // no clock in the widget, so the greeting only needs to repaint on
         // the hour without waking the device.
         long next = now - now % 3600000L + 3600000L + 500L;
-        alarms.setAndAllowWhileIdle(AlarmManager.RTC, next, tickIntent(context));
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            alarms.setAndAllowWhileIdle(AlarmManager.RTC, next, tickIntent(context));
+        } else {
+            alarms.setExact(AlarmManager.RTC, next, tickIntent(context));
+        }
     }
 
     private static boolean hasWidgets(Context context) {

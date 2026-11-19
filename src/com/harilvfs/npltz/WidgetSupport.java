@@ -604,11 +604,13 @@ final class WidgetSupport {
         if (alarms == null) {
             return;
         }
-        alarms.setAndAllowWhileIdle(
-            AlarmManager.RTC_WAKEUP,
-            nextMidnightMillis(),
-            refreshIntent(context)
-        );
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            alarms.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,
+                nextMidnightMillis(), refreshIntent(context));
+        } else {
+            alarms.setExact(AlarmManager.RTC_WAKEUP,
+                nextMidnightMillis(), refreshIntent(context));
+        }
     }
 
     static void cancelMidnight(Context context) {

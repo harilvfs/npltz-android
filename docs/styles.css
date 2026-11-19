@@ -945,8 +945,7 @@ img {
   color: var(--primary);
 }
 
-.foot-col a,
-.foot-soon {
+.foot-col a {
   padding: 5px 0;
   font-size: 14.5px;
   color: var(--foot-link);
@@ -956,20 +955,6 @@ img {
 
 .foot-col a:hover {
   color: var(--on-surface);
-}
-
-.foot-soon {
-  opacity: 0.8;
-  white-space: nowrap;
-}
-
-.foot-soon em {
-  font-style: normal;
-  font-size: 11px;
-  padding: 2px 8px;
-  margin-left: 2px;
-  border: 1px solid var(--outline);
-  border-radius: 999px;
 }
 
 .foot-bottom {

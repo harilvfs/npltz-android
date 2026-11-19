@@ -7,6 +7,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.Build;
 import android.service.notification.StatusBarNotification;
 
 import java.time.LocalDate;
@@ -18,7 +19,11 @@ public final class DateNotificationService extends Service {
     static boolean start(Context context) {
         Intent intent = new Intent(context, DateNotificationService.class);
         try {
-            context.startForegroundService(intent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                context.startForegroundService(intent);
+            } else {
+                context.startService(intent);
+            }
             return true;
         } catch (RuntimeException refused) {
             // android 12+ may reject a background start; post a normal notification.
@@ -65,6 +70,9 @@ public final class DateNotificationService extends Service {
         if (manager == null) {
             return false;
         }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return false;
+        }
         for (StatusBarNotification active : manager.getActiveNotifications()) {
             if (active.getId() == NotificationScheduler.PERSISTENT_NOTIFY_ID) {
                 return true;
@@ -77,7 +85,11 @@ public final class DateNotificationService extends Service {
     public void onDestroy() {
         running = false;
         shownDate = null;
-        stopForeground(STOP_FOREGROUND_REMOVE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            stopForeground(STOP_FOREGROUND_REMOVE);
+        } else {
+            stopForeground(true);
+        }
         NotificationManager manager =
             (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if (manager != null) {

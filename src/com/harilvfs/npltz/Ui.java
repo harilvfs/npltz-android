@@ -2,12 +2,13 @@
 package com.harilvfs.npltz;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.core.content.res.ResourcesCompat;
 
 import com.google.android.material.color.MaterialColors;
 
@@ -71,10 +72,9 @@ public final class Ui {
             return;
         }
         try {
-            Resources resources = context.getResources();
-            interNormal = resources.getFont(R.font.inter_regular);
-            interMedium = resources.getFont(R.font.inter_medium);
-            interBold = resources.getFont(R.font.inter_bold);
+            interNormal = ResourcesCompat.getFont(context, R.font.inter_regular);
+            interMedium = ResourcesCompat.getFont(context, R.font.inter_medium);
+            interBold = ResourcesCompat.getFont(context, R.font.inter_bold);
         } catch (RuntimeException ignored) {
             interNormal = systemTypeface(NORMAL);
             interMedium = systemTypeface(MEDIUM);

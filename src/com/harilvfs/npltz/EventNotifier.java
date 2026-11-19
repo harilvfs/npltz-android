@@ -10,6 +10,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -26,8 +28,11 @@ public final class EventNotifier {
     }
 
     public static void ensureChannel(Context context) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            return;
+        }
         NotificationManager manager =
-            context.getSystemService(NotificationManager.class);
+            (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (manager == null) {
             return;
         }
@@ -84,33 +89,33 @@ public final class EventNotifier {
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
                 && !alarmManager.canScheduleExactAlarms()) {
-                alarmManager.setAndAllowWhileIdle(
-                    AlarmManager.RTC_WAKEUP,
-                    trigger,
-                    pending
-                );
-            } else {
+                setAllowWhileIdle(alarmManager, trigger, pending);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 alarmManager.setExactAndAllowWhileIdle(
-                    AlarmManager.RTC_WAKEUP,
-                    trigger,
-                    pending
-                );
+                    AlarmManager.RTC_WAKEUP, trigger, pending);
+            } else {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, trigger, pending);
             }
             return true;
         } catch (SecurityException ignored) {
             // exact alarms may be blocked; use an inexact alarm instead.
             try {
-                alarmManager.setAndAllowWhileIdle(
-                    AlarmManager.RTC_WAKEUP,
-                    trigger,
-                    pending
-                );
+                setAllowWhileIdle(alarmManager, trigger, pending);
                 return true;
             } catch (Exception fallbackFailure) {
                 return false;
             }
         } catch (Exception ignored) {
             return false;
+        }
+    }
+
+    private static void setAllowWhileIdle(AlarmManager alarmManager, long trigger,
+        PendingIntent pending) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, trigger, pending);
+        } else {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, trigger, pending);
         }
     }
 
@@ -154,16 +159,16 @@ public final class EventNotifier {
             + CalendarLogic.number(event.year, nepali);
         String meta = date + " \u00b7 " + time;
 
-        Notification.Builder builder = new Notification.Builder(context, CHANNEL_ID)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_today)
             .setContentTitle(event.title)
             .setContentText(meta + (event.note.isEmpty() ? "" : " \u00b7 " + event.note))
-            .setStyle(new Notification.BigTextStyle().bigText(
+            .setStyle(new NotificationCompat.BigTextStyle().bigText(
                 event.note.isEmpty() ? meta : meta + "\n\n" + event.note
             ))
             .setContentIntent(openIntent(context, eventId))
             .setAutoCancel(true)
-            .setCategory(Notification.CATEGORY_REMINDER)
+            .setCategory(NotificationCompat.CATEGORY_REMINDER)
             .setColor(theme.primary)
             .setWhen(triggerMillis(event))
             .setShowWhen(true);
@@ -189,10 +194,12 @@ public final class EventNotifier {
         }
         NotificationManager manager =
             (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if (manager == null || !manager.areNotificationsEnabled()) {
+        if (manager == null
+            || !NotificationManagerCompat.from(context).areNotificationsEnabled()) {
             return false;
         }
-        NotificationChannel channel = manager.getNotificationChannel(CHANNEL_ID);
+        NotificationChannel channel = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
+            ? manager.getNotificationChannel(CHANNEL_ID) : null;
         if (channel != null
             && channel.getImportance() == NotificationManager.IMPORTANCE_NONE) {
             return false;
