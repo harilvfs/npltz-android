@@ -10,6 +10,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.os.Build;
 import android.provider.Settings;
 
 final class AlertPlayer {
@@ -25,7 +26,7 @@ final class AlertPlayer {
             }
             NotificationManager notifications =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            if (notifications != null
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && notifications != null
                 && notifications.getCurrentInterruptionFilter()
                     != NotificationManager.INTERRUPTION_FILTER_ALL) {
                 return;
@@ -52,10 +53,12 @@ final class AlertPlayer {
             Vibrator vibrator =
                 (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
             if (vibrator != null && vibrator.hasVibrator()) {
-                vibrator.vibrate(VibrationEffect.createWaveform(
-                    new long[] {0L, 350L, 250L, 350L},
-                    -1
-                ));
+                long[] pattern = new long[] {0L, 350L, 250L, 350L};
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    vibrator.vibrate(VibrationEffect.createWaveform(pattern, -1));
+                } else {
+                    vibrator.vibrate(pattern, -1);
+                }
             }
         } catch (Exception ignored) {
         }

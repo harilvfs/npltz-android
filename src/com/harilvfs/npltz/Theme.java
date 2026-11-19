@@ -2,6 +2,7 @@
 package com.harilvfs.npltz;
 
 import android.graphics.Color;
+import androidx.core.graphics.ColorUtils;
 
 public final class Theme {
     public final String key;
@@ -60,7 +61,7 @@ public final class Theme {
         this.error = error;
         this.styleRes = styleRes;
 
-        this.light = Color.luminance(bg) > 0.5f;
+        this.light = ColorUtils.calculateLuminance(bg) > 0.5f;
         int darkText = light ? fg : bg;
         int lightText = light ? bg : fg;
 
@@ -185,6 +186,6 @@ public final class Theme {
     }
 
     public static int contrasting(int color, int dark, int light) {
-        return Color.luminance(color) > 0.42f ? dark : light;
+        return ColorUtils.calculateLuminance(color) > 0.42f ? dark : light;
     }
 }
