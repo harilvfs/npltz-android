@@ -210,14 +210,12 @@
 [data-theme="plain-dark"],
 [data-theme="rose-pine"] {
   color-scheme: dark;
-  --phone-shadow: rgba(0, 0, 0, 0.45);
   --foot-link: var(--on-surface-variant);
 }
 
 [data-theme="light"],
 [data-theme="warm-reading"] {
   color-scheme: light;
-  --phone-shadow: rgba(40, 30, 20, 0.18);
   --foot-link: var(--on-surface-variant);
 }
 
@@ -631,8 +629,20 @@ img {
   justify-content: center;
 }
 
-.phone {
-  filter: drop-shadow(0 26px 48px var(--phone-shadow));
+.phone-device {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1182 / 2263;
+}
+
+.phone-device > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .hero-phone {
@@ -762,6 +772,8 @@ img {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
   border-radius: 20px;
   cursor: grab;
 }
@@ -781,9 +793,10 @@ img {
   margin: 0;
   text-align: center;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
-.shot img {
+.shot .phone-device {
   width: 100%;
 }
 
@@ -797,6 +810,17 @@ img {
   margin: 20px 0 0 4px;
   font-size: 13px;
   color: var(--on-surface-variant);
+}
+
+.mockup-credit {
+  margin: 8px 0 0 4px;
+  font-size: 12px;
+}
+
+.mockup-credit a {
+  color: var(--on-surface-variant);
+  text-decoration-color: var(--outline);
+  text-underline-offset: 3px;
 }
 
 .themes-grid {
@@ -863,7 +887,7 @@ img {
   justify-content: center;
 }
 
-.themes-art img {
+.theme-phone {
   width: min(305px, 100%);
 }
 

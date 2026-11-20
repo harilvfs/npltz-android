@@ -15,7 +15,7 @@
   <meta property="og:image" content="https://raw.githubusercontent.com/harilvfs/npltz-android/main/docs/icon.png">
   <link rel="preload" href="assets/fonts/inter-regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="assets/fonts/inter-medium.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=8">
+  <link rel="stylesheet" href="styles.css?v=14">
   <script>
     // Older browsers do not support gap in flex layouts.
     try {
@@ -174,8 +174,10 @@
       <p class="fineprint" data-i18n="fineprint">Android 5.0 and up. Free and open source, GPL-3.0. Built with Material 3.</p>
     </div>
     <div class="hero-art">
-      <img class="phone hero-phone" src="screens/home.png" width="756" height="1636"
-           alt="Npltz month view showing Kartik 2083 with BS and AD dates under each day">
+      <div class="phone-device hero-phone">
+        <img src="screens/web/home-hero.webp" width="900" height="1723"
+             alt="Npltz month view showing Kartik 2083 with BS and AD dates under each day">
+      </div>
     </div>
   </section>
 
@@ -252,37 +254,50 @@
 
     <div class="rail">
       <figure class="shot">
-        <img class="phone" src="screens/home.png" width="756" height="1636" loading="lazy"
-             alt="Month view with BS and AD dates">
+        <div class="phone-device">
+          <img src="screens/web/home.webp" width="700" height="1340" loading="lazy" decoding="async" fetchpriority="low"
+               alt="Month view with BS and AD dates">
+        </div>
         <figcaption data-i18n="cap_month">Month view</figcaption>
       </figure>
       <figure class="shot">
-        <img class="phone" src="screens/year.png" width="756" height="1636" loading="lazy"
-             alt="Year view of 2083 BS">
+        <div class="phone-device">
+          <img src="screens/web/year.webp" width="700" height="1340" loading="lazy" decoding="async" fetchpriority="low"
+               alt="Year view of 2083 BS">
+        </div>
         <figcaption data-i18n="cap_year">Year view</figcaption>
       </figure>
       <figure class="shot">
-        <img class="phone" src="screens/day.png" width="756" height="1636" loading="lazy"
-             alt="Day details with week number and year progress">
+        <div class="phone-device">
+          <img src="screens/web/day.webp" width="700" height="1340" loading="lazy" decoding="async" fetchpriority="low"
+               alt="Day details with week number and year progress">
+        </div>
         <figcaption data-i18n="cap_day">Day details</figcaption>
       </figure>
       <figure class="shot">
-        <img class="phone" src="screens/events.png" width="756" height="1636" loading="lazy"
-             alt="Events and notes for a date">
+        <div class="phone-device">
+          <img src="screens/web/events.webp" width="700" height="1340" loading="lazy" decoding="async" fetchpriority="low"
+               alt="Events and notes for a date">
+        </div>
         <figcaption data-i18n="cap_events">Events and notes</figcaption>
       </figure>
       <figure class="shot">
-        <img class="phone" src="widgets.png" width="756" height="1636" loading="lazy"
-             alt="Home screen widgets for date, month and greeting">
+        <div class="phone-device">
+          <img src="screens/web/widgets.webp" width="700" height="1340" loading="lazy" decoding="async" fetchpriority="low"
+               alt="Home screen widgets for date, month and greeting">
+        </div>
         <figcaption data-i18n="cap_widgets">Widgets</figcaption>
       </figure>
       <figure class="shot">
-        <img class="phone" src="screens/notifications.png" width="756" height="1636" loading="lazy"
-             alt="Persistent date notification">
+        <div class="phone-device">
+          <img src="screens/web/notifications.webp" width="700" height="1340" loading="lazy" decoding="async" fetchpriority="low"
+               alt="Persistent date notification">
+        </div>
         <figcaption data-i18n="cap_notifications">Notifications</figcaption>
       </figure>
     </div>
     <p class="rail-note" data-i18n="rail_note">Screenshots use the default Catppuccin Mocha theme.</p>
+    <p class="mockup-credit"><a href="https://github.com/boxcreate/boxmock" target="_blank" rel="noopener noreferrer" data-i18n="mockup_credit">Phone mockups rendered with boxmock (Pixel 9 Pro).</a></p>
   </section>
 
   <section class="section wrap" id="themes">
@@ -334,8 +349,10 @@
         </div>
       </div>
       <div class="themes-art">
-        <img class="phone" src="screens/settings.png" width="756" height="1636" loading="lazy"
-             alt="Settings page with theme, font, text size and language options">
+        <div class="phone-device theme-phone">
+          <img id="theme-home-preview" src="screens/web/theme-catppuccin-mocha.webp" width="700" height="1340" loading="lazy" decoding="async"
+               alt="Npltz home screen in the selected color theme">
+        </div>
       </div>
     </div>
   </section>
@@ -455,6 +472,6 @@
   <svg class="icon" aria-hidden="true"><use href="#i-up"/></svg>
 </button>
 
-<script src="script.js?v=5"></script>
+<script src="script.js?v=8"></script>
 </body>
 </html>
