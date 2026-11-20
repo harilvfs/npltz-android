@@ -15,9 +15,9 @@ No ads, no tracking and no network permission.
 
 <div align="center">
 
-<a href="docs/screens-1.png"><img src="docs/screens-1.png" width="396" alt="Month view, year view and the day sheet" /></a> <a href="docs/screens-2.png"><img src="docs/screens-2.png?v=2" width="130" alt="Events and notes" /></a> <a href="docs/widgets.png"><img src="docs/widgets.png?v=2" width="130" alt="npltz widgets on a home screen" /></a> <a href="docs/screens/notifications.png"><img src="docs/screens/notifications.png" width="130" alt="The date notification" /></a>
+<a href="docs/screens-1.png?v=4"><img src="docs/screens-1.png?v=4" width="396" alt="Month view, year view and the day sheet in phone frames" /></a> <a href="docs/screens-2.png?v=5"><img src="docs/screens-2.png?v=5" width="130" alt="Events and notes in a phone frame" /></a> <a href="docs/screens/device/widgets.png"><img src="docs/screens/device/widgets.png" width="130" alt="Npltz widgets on a home screen in a phone frame" /></a> <a href="docs/screens/device/notifications.png"><img src="docs/screens/device/notifications.png" width="130" alt="The date notification in a phone frame" /></a>
 
-<sub>Month and year views, day details, events, widgets and the date notification.<br />Tap any screen to see it full size.</sub>
+<sub>Month and year views, day details, events, widgets and the date notification.<br />Tap any screen to see it full size. Phone mockups rendered with <a href="https://github.com/boxcreate/boxmock">boxmock</a> (Pixel 9 Pro).</sub>
 
 </div>
 

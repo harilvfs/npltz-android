@@ -68,6 +68,7 @@
     cap_widgets: "विजेट",
     cap_notifications: "सूचना",
     rail_note: "स्क्रिनसटहरू पूर्वनिर्धारित Catppuccin Mocha थिममा छन्।",
+    mockup_credit: "फोन मोकअप boxmock (Pixel 9 Pro) बाट रेन्डर गरिएका हुन्।",
 
     themes_eyebrow: "थिम",
     themes_h2: "नौ थिम। एउटा छान्नुहोस्।",
@@ -200,9 +201,13 @@
 
   var themeColor = document.querySelector('meta[name="theme-color"]');
   var buttons = document.querySelectorAll("[data-set-theme]");
+  var themePreview = document.getElementById("theme-home-preview");
 
   function apply(theme, remember) {
     root.dataset.theme = theme;
+    if (themePreview) {
+      themePreview.src = "screens/web/theme-" + theme + ".webp";
+    }
     buttons.forEach(function (button) {
       button.setAttribute(
         "aria-pressed",
