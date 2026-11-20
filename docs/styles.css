@@ -632,7 +632,12 @@ img {
 .phone-device {
   position: relative;
   width: 100%;
-  aspect-ratio: 1182 / 2263;
+}
+
+.phone-device::before {
+  content: "";
+  display: block;
+  padding-top: 191.455%;
 }
 
 .phone-device > img {
