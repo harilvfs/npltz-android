@@ -145,6 +145,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:baselineAligned="false"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
@@ -165,13 +166,13 @@
                     android:id="@+id/greeting_card"
                     style="@style/Widget.Npltz.Card.Flush"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="14dp"
                     android:layout_weight="1">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingStart="18dp"
