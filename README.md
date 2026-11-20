@@ -199,4 +199,4 @@ is MIT licensed; this Android app is GPL-3.0.
 
 If you love my work, starring this repo is a support for me. Thank you.
 
-Made with ❤️ by Hari Chalise.
+Made with ❤️ by Hari Chalise in Nepal.
