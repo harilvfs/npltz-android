@@ -73,6 +73,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 public final class MainActivity extends AppCompatActivity implements CalendarView.Host {
@@ -175,14 +176,14 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        float scale = new Prefs(newBase).getTextScale();
-        if (Math.abs(scale - 1f) < 0.001f) {
-            super.attachBaseContext(newBase);
-            return;
-        }
+        Prefs savedPrefs = new Prefs(newBase);
         Configuration configuration = new Configuration(
             newBase.getResources().getConfiguration()
         );
+        configuration.setLocale(Locale.forLanguageTag(
+            "ne".equals(savedPrefs.getScript()) ? "ne" : "en"
+        ));
+        float scale = savedPrefs.getTextScale();
         float base = configuration.fontScale <= 0f ? 1f : configuration.fontScale;
         configuration.fontScale = base * scale;
         super.attachBaseContext(newBase.createConfigurationContext(configuration));
@@ -1508,7 +1509,7 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
     private String eventsSummary() {
         List<EventStore.Event> all = EventStore.all(this);
         if (all.isEmpty()) {
-            return "No events yet";
+            return nepali ? "अहिलेसम्म कार्यक्रम छैन" : "No events yet";
         }
         long now = System.currentTimeMillis();
         int upcoming = 0;
@@ -1518,6 +1519,10 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
             }
         }
         if (upcoming > 0) {
+            if (nepali) {
+                return CalendarLogic.number(upcoming, true) + " आउँदैछ · "
+                    + CalendarLogic.number(all.size(), true) + " जम्मा";
+            }
             return upcoming + " upcoming \u00b7 " + all.size() + " total";
         }
         return nepali
@@ -1586,9 +1591,9 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
 
     private String reminderSummary() {
         if (!prefs.isNotifyEnabled()) {
-            return "Off";
+            return nepali ? "बन्द" : "Off";
         }
-        return "On \u00b7 " + NotificationScheduler.timeLabel(
+        return (nepali ? "चालु \u00b7 " : "On \u00b7 ") + NotificationScheduler.timeLabel(
             this,
             prefs.getNotifyHour(),
             prefs.getNotifyMinute()
@@ -1975,15 +1980,15 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
 
     private String textScaleLabel(float scale) {
         if (Math.abs(scale - 0.90f) < 0.01f) {
-            return "Small";
+            return nepali ? "सानो" : "Small";
         }
         if (Math.abs(scale - 1.10f) < 0.01f) {
-            return "Large";
+            return nepali ? "ठूलो" : "Large";
         }
         if (Math.abs(scale - 1.20f) < 0.01f) {
-            return "Extra large";
+            return nepali ? "अति ठूलो" : "Extra large";
         }
-        return "Default";
+        return nepali ? "पूर्वनिर्धारित" : "Default";
     }
 
     private void applyTheme(Theme option) {
@@ -2149,9 +2154,9 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
 
     private String reminderStatus() {
         if (!prefs.isNotifyEnabled()) {
-            return "Off";
+            return nepali ? "बन्द" : "Off";
         }
-        return "Next: " + NotificationScheduler.nextTriggerLabel(
+        return (nepali ? "अर्को: " : "Next: ") + NotificationScheduler.nextTriggerLabel(
             this,
             prefs.getNotifyHour(),
             prefs.getNotifyMinute()

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Npltz</string>
+    <string name="widget_date_label">Npltz मिति</string>
+    <string name="widget_date_description">आजको विक्रम संवत् र ईस्वी मिति।</string>
+    <string name="widget_month_label">Npltz महिना</string>
+    <string name="widget_month_description">हालको विक्रम संवत् महिना।</string>
+    <string name="widget_greeting_label">Npltz अभिवादन</string>
+    <string name="widget_greeting_description">अभिवादन र शुभकामना।</string>
+
+    <string name="settings">सेटिङहरू</string>
+    <string name="back">पछाडि</string>
+    <string name="repository">GitHub भण्डार</string>
+    <string name="today">आज</string>
+    <string name="search">खोज्नुहोस्</string>
+    <string name="month">महिना</string>
+    <string name="year">वर्ष</string>
+    <string name="previous_month">अघिल्लो महिना</string>
+    <string name="next_month">अर्को महिना</string>
+
+    <string name="appearance">रूप</string>
+    <string name="home_section">गृहपृष्ठ</string>
+    <string name="calendar_section">पात्रो</string>
+    <string name="notifications_section">सूचनाहरू</string>
+    <string name="system_section">प्रणाली</string>
+    <string name="autostart_row">स्वतः सुरु</string>
+    <string name="autostart_on">चालु</string>
+    <string name="autostart_off">बन्द</string>
+    <string name="autostart_why">केही फोनले रिस्टार्टपछि एपहरू स्वतः सुरु हुन रोक्छन्। विजेट र रिमाइन्डरहरू आफैँ फर्काउन स्वतः सुरु हुने अनुमति दिनुहोस्।</string>
+    <string name="about_section">परिचय</string>
+    <string name="repositories">कोड भण्डारहरू</string>
+    <string name="theme">थिम</string>
+    <string name="font">फन्ट</string>
+    <string name="text_size">अक्षरको आकार</string>
+    <string name="language">भाषा</string>
+    <string name="clock_24h">२४ घण्टे समय</string>
+    <string name="greeting">अभिवादन</string>
+    <string name="your_name">तपाईंको नाम</string>
+    <string name="events_notes">कार्यक्रम र टिपोट</string>
+    <string name="daily_reminder">दैनिक रिमाइन्डर</string>
+    <string name="about_npltz">Npltz को परिचय</string>
+    <string name="about">परिचय</string>
+    <string name="changelog">परिवर्तन सूची</string>
+    <string name="changelog_empty">अहिलेसम्म कुनै परिवर्तन सूची उपलब्ध छैन।</string>
+    <string name="changelog_source">GitHub मा पूरा परिवर्तन सूची हेर्नुहोस्</string>
+    <string name="tui_app">TUI एप</string>
+    <string name="android_app">Android एप</string>
+    <string name="star_note">Npltz तपाईंलाई उपयोगी लागेमा, रिपोजिटरीलाई स्टार गरेर सहयोग गर्न सक्नुहुन्छ।</string>
+    <string name="bugs_section">त्रुटि रिपोर्ट गर्नुहोस्</string>
+    <string name="about_first_app">यो मेरो पहिलो Android एप हो। कुनै त्रुटि भेट्नुभयो भने कृपया रिपोर्ट गर्नुहोस्।</string>
+    <string name="report_issue">GitHub मा समस्या खोल्नुहोस्</string>
+    <string name="report_issue_url">github.com/harilvfs/npltz-android/issues</string>
+    <string name="report_mail">इमेलबाट त्रुटि रिपोर्ट गर्नुहोस्</string>
+    <string name="dev_mail_url">harilvfs@chalisehari.com.np</string>
+    <string name="tui_repo_url">github.com/harilvfs/npltz</string>
+    <string name="android_repo_url">github.com/harilvfs/npltz-android</string>
+
+    <string name="about_developer">विकासकर्ता</string>
+    <string name="about_npltz_section">NPLTZ</string>
+    <string name="dev_name">Hari Chalise</string>
+    <string name="dev_handle">@harilvfs</string>
+    <string name="dev_bio">नमस्ते, म Hari Chalise हुँ, Linux प्रयोगकर्ता र विकासकर्ता। आफ्नो काम सजिलो बनाउन TUI एप र Bash स्क्रिप्ट लेख्छु र खुला स्रोत समुदायमा योगदान गर्छु।</string>
+    <string name="about_github">GitHub प्रोफाइल</string>
+    <string name="about_website">वेबसाइट</string>
+    <string name="about_x">X (Twitter)</string>
+    <string name="about_bluesky">Bluesky</string>
+    <string name="about_email">इमेल</string>
+    <string name="about_app_text">Npltz Android का लागि Java र Material 3 मा बनेको सरल नेपाली (विक्रम संवत्) पात्रो हो। यसले AD मिति, प्रत्यक्ष अभिवादन र नेपालको समय, गृहपृष्ठका विजेट, दैनिक रिमाइन्डर, स्थायी मिति सूचना र कार्यक्रमका रिमाइन्डर देखाउँछ।
+
+Npltz को सुरुवात डेस्कटप र Termux का लागि TUI एपबाट भएको हो। यो Android एप Material 3 र Material You रङ प्रणालीमा आधारित मौलिक पुनर्निर्माण हो।
+
+सबै कुरा अफलाइन चल्छ। पात्रोको डेटा एपमै समावेश छ, त्यसैले API, खाता, विज्ञापन, विश्लेषण वा ट्र्याकिङ छैन।
+
+विक्रम संवत् डेटा २०९० सम्म समावेश छ। त्यसपछिको भरपर्दो डेटा उपलब्ध भएपछि एप अद्यावधिक गरिनेछ।</string>
+
+    <string name="cancel">रद्द गर्नुहोस्</string>
+    <string name="save">सुरक्षित गर्नुहोस्</string>
+    <string name="delete">मेटाउनुहोस्</string>
+    <string name="done">सम्पन्न</string>
+    <string name="add_event">कार्यक्रम थप्नुहोस्</string>
+    <string name="jump">जानुहोस्</string>
+    <string name="close">बन्द गर्नुहोस्</string>
+    <string name="clear">मेटाउनुहोस्</string>
+    <string name="choose_time">समय छान्नुहोस्</string>
+    <string name="change">परिवर्तन गर्नुहोस्</string>
+    <string name="send_test">परीक्षण पठाउनुहोस्</string>
+    <string name="go_to_today">आजमा जानुहोस्</string>
+    <string name="permanent_notification">स्थायी सूचना</string>
+    <string name="title_hint">शीर्षक</string>
+    <string name="note_hint">टिपोट (वैकल्पिक)</string>
+    <string name="time">समय</string>
+    <string name="reminder_sent">रिमाइन्डर पठाइयो</string>
+    <string name="search_dates">मिति खोज्नुहोस्</string>
+    <string name="name_used_only">अभिवादनका लागि मात्र प्रयोग हुन्छ।</string>
+    <string name="reminder_time">रिमाइन्डरको समय</string>
+    <string name="selected">छानिएको</string>
+</resources>
