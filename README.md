@@ -4,6 +4,13 @@
 
 # npltz for Android
 
+<p align="center">
+  <a href="https://github.com/harilvfs/npltz-android"><img src="https://img.shields.io/badge/Built%20with-Java%20%2B%20Material%203-7E4FDB?style=flat&labelColor=2B1757&logo=android&logoColor=white" alt="Built with Java and Material 3"></a>
+  <a href="https://github.com/harilvfs/npltz-android/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/harilvfs/npltz-android/ci.yml?branch=main&style=flat&label=CI&color=9B7FD4&labelColor=2B1757&logo=githubactions&logoColor=white" alt="CI status"></a>
+  <a href="https://github.com/harilvfs/npltz-android/blob/main/LICENSE"><img src="https://img.shields.io/github/license/harilvfs/npltz-android?style=flat&color=F5B454&labelColor=2B1757&logo=gnu&logoColor=white" alt="GPL-3.0 license"></a>
+  <a href="https://github.com/harilvfs/npltz-android/releases/latest"><img src="https://img.shields.io/github/v/release/harilvfs/npltz-android?style=flat&label=latest%20release&color=E5405E&labelColor=2B1757&logo=github&logoColor=white" alt="Latest release"></a>
+</p>
+
 A clean, native Android calendar for Nepali dates (Bikram Sambat, also known
 as Nepali Patro). It is driven by the same calendar data as
 [npltz](https://github.com/harilvfs/npltz), the terminal calendar, and brings
