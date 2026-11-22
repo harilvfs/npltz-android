@@ -1,0 +1,16 @@
+Add website for github pages (#11)
+Show live github star count
+Slide the language switch pill on selection
+Support Android 5 (#12)
+Label the changelog with the released version
+Support older browsers
+Show changelog in landscape
+Center back-to-top button in older browsers
+Show clock in landscape greeting
+Show phone mockups in older browsers
+Localize settings in Nepali
+Pin the build to the full v1.2.0 commit hash
+Add realistic phone mockups to site and README (#13)
+Add Nepal to project credit
+Count docs in language stats
+List docs languages explicitly in gitattributes

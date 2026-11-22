@@ -1,4 +1,59 @@
 
+## [1.3.0](https://github.com/harilvfs/npltz-android/compare/v1.2.0...v1.3.0) - 2026-11-22
+
+
+### 🚀 Features
+
+
+- [f00831c](https://github.com/harilvfs/npltz-android/commit/f00831c4e18ed7d8c3a243fa65f14c4b4ff34e65)  *(site)* Add website for github pages (#11) by @harilvfs in [#11](https://github.com/harilvfs/npltz-android/pull/11)
+
+- [85dfc4a](https://github.com/harilvfs/npltz-android/commit/85dfc4a8adf951f67f7c94db91cfcd3356ae169b)  *(site)* Show live github star count by @harilvfs
+
+- [24809ab](https://github.com/harilvfs/npltz-android/commit/24809abee3dd4d470c8a4c59d2279fded5b4c9d0)  *(site)* Slide the language switch pill on selection by @harilvfs
+
+- [3d95aa8](https://github.com/harilvfs/npltz-android/commit/3d95aa8551f1d797016205567e1bb5800e338653) Support Android 5 (#12) by @harilvfs in [#12](https://github.com/harilvfs/npltz-android/pull/12)
+
+
+
+### 🐛 Bug Fixes
+
+
+- [5086afc](https://github.com/harilvfs/npltz-android/commit/5086afc0774d21a9a23a07aafda139c2aca76fc1)  *(release)* Label the changelog with the released version by @harilvfs
+
+- [2f656fd](https://github.com/harilvfs/npltz-android/commit/2f656fd798bff729dbe9f4e12d2cf00188b26a6d)  *(web)* Support older browsers by @harilvfs
+
+- [136c452](https://github.com/harilvfs/npltz-android/commit/136c452e43a3515636ddf007aa4c5e2a6ce34fbb)  *(ui)* Show changelog in landscape by @harilvfs
+
+- [9547e16](https://github.com/harilvfs/npltz-android/commit/9547e16f218acf9c6572b1ed3d9c1aad41073882)  *(web)* Center back-to-top button in older browsers by @harilvfs
+
+- [6666225](https://github.com/harilvfs/npltz-android/commit/6666225527a746e908c5e2025367f754e9a5389e)  *(ui)* Show clock in landscape greeting by @harilvfs
+
+- [b99fe99](https://github.com/harilvfs/npltz-android/commit/b99fe9997c4e4869fde4fa376c5665cfca8ef0cc)  *(docs)* Show phone mockups in older browsers by @harilvfs
+
+- [7b5763f](https://github.com/harilvfs/npltz-android/commit/7b5763fa327a5cf1d5965112eeb091d91968bbba)  *(android)* Localize settings in Nepali by @harilvfs
+
+
+
+### 📚 Documentation
+
+
+- [e0108ef](https://github.com/harilvfs/npltz-android/commit/e0108ef859f36338930168f8b191bf1be1228e0b)  *(fdroid)* Pin the build to the full v1.2.0 commit hash by @harilvfs
+
+- [2d64d14](https://github.com/harilvfs/npltz-android/commit/2d64d149d2743b772629ffeccb52fcabbfc6587d) Add realistic phone mockups to site and README (#13) by @harilvfs in [#13](https://github.com/harilvfs/npltz-android/pull/13)
+
+- [5ae2520](https://github.com/harilvfs/npltz-android/commit/5ae25208a68dc1af3a59539e8c89a1c43c87c3f0) Add Nepal to project credit by @harilvfs
+
+
+
+### ⚙️ Miscellaneous Tasks
+
+
+- [2f3924b](https://github.com/harilvfs/npltz-android/commit/2f3924b2959095484584b30ff56de26b856e5f74)  *(github)* Count docs in language stats by @harilvfs
+
+- [555efe7](https://github.com/harilvfs/npltz-android/commit/555efe7e09c1899ccb43028091d84ba0266239f6)  *(github)* List docs languages explicitly in gitattributes by @harilvfs
+
+
+
 ## [1.2.0](https://github.com/harilvfs/npltz-android/compare/v1.1.0...v1.2.0) - 2026-11-17
 
 
