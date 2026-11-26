@@ -1,0 +1,4 @@
+# typos.toml - Configuration file for typos spellchecker
+
+[default.extend-words]
+pn = "pn"
