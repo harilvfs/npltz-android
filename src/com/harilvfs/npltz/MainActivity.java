@@ -1761,7 +1761,8 @@ public final class MainActivity extends AppCompatActivity implements CalendarVie
         if (year < CalendarLogic.BS_EPOCH_YEAR || year > CalendarLogic.BS_MAX_YEAR) {
             return GotoResult.invalid(
                 nepali
-                    ? "वर्ष 1975-2090 वि.सं. हुनुपर्छ।"
+                    ? "वर्ष " + CalendarLogic.BS_EPOCH_YEAR + "-"
+                        + CalendarLogic.BS_MAX_YEAR + " वि.सं. हुनुपर्छ।"
                     : "Year must be " + CalendarLogic.BS_EPOCH_YEAR + "-"
                         + CalendarLogic.BS_MAX_YEAR + " BS."
             );
