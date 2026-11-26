@@ -85,7 +85,7 @@ manager.
   Settings → Apps or Permissions). Without it, the system blocks widget updates
   and reminder alarms in the background, so widgets and reminders may not resume
   after a reboot until you open the app.
-- The calendar data covers 1975–2090 BS.
+- The calendar data covers 1975–2100 BS.
 - Typeset in [Inter](https://rsms.me/inter/), under the SIL Open Font License;
   the license text ships with the app in `assets/fonts/Inter-OFL.txt`.
 - APKs from Releases are debug-signed. Build with your own release key if you
@@ -151,7 +151,7 @@ You can also call Gradle directly:
 Expected test output:
 
 ```text
-calendar core ok (2803 checks)
+calendar core ok (3043 checks)
 ```
 
 ## Data and logic
@@ -169,8 +169,12 @@ Npltz for Android is the phone side of the project. It uses Java views,
 Material 3 components and the generated table, so the app never parses JSON and
 does not need the Rust binary at runtime.
 
-The table covers **1975–2090 BS**. `tools/CoreTest.java` checks the reference
-dates from the Rust tests and round-trips the first and last day of every month.
+The table covers **1975–2100 BS**. The 1975–2090 years come from the Rust
+project's data; 2091–2100 extend it from the public
+[`nepali-datetime`](https://github.com/amitgaru/nepali-datetime) dataset and are
+provisional projections rather than officially published patro dates.
+`tools/CoreTest.java` checks the reference dates from the Rust tests and
+round-trips the first and last day of every month.
 
 ## Changelog
 

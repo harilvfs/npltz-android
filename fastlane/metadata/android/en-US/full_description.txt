@@ -8,6 +8,6 @@ Npltz is a clean, native Nepali (Bikram Sambat) calendar for Android, built with
 - Date, month and greeting home-screen widgets
 - Nine Material You themes, three fonts, four text sizes and English/Nepali scripts
 
-Everything runs offline. The BS calendar data is compiled into the app, so there is no API, no account, no ads, no analytics and no tracking. The table covers 1975–2090 BS.
+Everything runs offline. The BS calendar data is compiled into the app, so there is no API, no account, no ads, no analytics and no tracking. The table covers 1975–2100 BS.
 
 Npltz started as a TUI app for desktop and Termux. This Android app shares the same calendar logic and design language.
