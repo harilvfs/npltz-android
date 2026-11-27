@@ -1,4 +1,45 @@
 
+## [1.4.0](https://github.com/harilvfs/npltz-android/compare/v1.3.0...v1.4.0) - 2026-11-27
+
+
+### 🚀 Features
+
+
+- [10a92f9](https://github.com/harilvfs/npltz-android/commit/10a92f9d4e5af0e18d49245d84d46f145f8666ec)  *(calendar)* Extend BS data through 2100 (#16) by @harilvfs in [#16](https://github.com/harilvfs/npltz-android/pull/16)
+
+
+
+### 🐛 Bug Fixes
+
+
+- [167a38b](https://github.com/harilvfs/npltz-android/commit/167a38b3c9f10f88f9d61c9b7a1e807d1ed1407a)  *(fdroid)* Correct categories and lints by @harilvfs
+
+- [f9a22b2](https://github.com/harilvfs/npltz-android/commit/f9a22b271c7403c6c7da0becabbfb4b31f9305df)  *(ci)* Ignore pn in typos check by @harilvfs
+
+
+
+### 📚 Documentation
+
+
+- [1340b67](https://github.com/harilvfs/npltz-android/commit/1340b67cb08b5353cdabe52ebb4036f1a2177b44)  *(readme)* Add some imgshields badges by @harilvfs
+
+- [b77ecb0](https://github.com/harilvfs/npltz-android/commit/b77ecb0682176d6bf48c3327e7b370315920b573)  *(readme)* Correct badges place by @harilvfs
+
+
+
+### ⚙️ Miscellaneous Tasks
+
+
+- [b297df6](https://github.com/harilvfs/npltz-android/commit/b297df679bdd888f532f9513c86086d3c080902c)  *(fdroid)* Bump metadata to 1.3.0 by @harilvfs
+
+- [e468db4](https://github.com/harilvfs/npltz-android/commit/e468db4f551e8d053e1f9cd8bd7de6fc299bb7b6) Add .editorconfig with per-language indentation by @harilvfs
+
+- [722adc1](https://github.com/harilvfs/npltz-android/commit/722adc1fb088eda79e520c7f4f281fe892e1af46) Add typos check workflow by @harilvfs
+
+- [fb1faa4](https://github.com/harilvfs/npltz-android/commit/fb1faa483b58d6c6798c3a762f6f2281f198c7f8)  *(release)* Sync docs version with release tag by @harilvfs
+
+
+
 ## [1.3.0](https://github.com/harilvfs/npltz-android/compare/v1.2.0...v1.3.0) - 2026-11-22
 
 

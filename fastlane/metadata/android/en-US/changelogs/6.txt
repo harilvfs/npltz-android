@@ -1,0 +1,9 @@
+Extend BS data through 2100 (#16)
+Correct categories and lints
+Ignore pn in typos check
+Add some imgshields badges
+Correct badges place
+Bump metadata to 1.3.0
+Add .editorconfig with per-language indentation
+Add typos check workflow
+Sync docs version with release tag
