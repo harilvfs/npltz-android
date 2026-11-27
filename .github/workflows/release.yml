@@ -36,12 +36,13 @@ jobs:
           VERSION=$(echo "${{ github.event.inputs.tag_version }}" | sed 's/^v//')
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-      - name: Update build.gradle version
+      - name: Update build.gradle and docs version
         if: ${{ github.event.inputs.update_version == 'true' }}
         run: |
           sed -i "s/versionName \".*\"/versionName \"$VERSION\"/" build.gradle
           CODE=$(grep -oP 'versionCode \K[0-9]+' build.gradle)
           sed -i "s/versionCode .*/versionCode $((CODE + 1))/" build.gradle
+          sed -i "s/\"softwareVersion\": \".*\"/\"softwareVersion\": \"$VERSION\"/" docs/index.html
 
       - name: Regenerate CHANGELOG.md
         uses: orhun/git-cliff-action@v4
@@ -115,7 +116,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add build.gradle CHANGELOG.md fastlane/
+          git add build.gradle docs/index.html CHANGELOG.md fastlane/
           git commit -m "chore(release): bump version"
           git push
 
